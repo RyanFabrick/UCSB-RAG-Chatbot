@@ -112,7 +112,11 @@ class UCSBCatalogScraper:
             
             # Extract page title
             title = soup.find('title')
-            title_text = title.get_text().strip() if title else "No Title"
+
+            if title:
+                title_text = title.get_text().strip()
+            else:
+                title_text = "No Title"
             
             # Extract main content
             content = self.extract_text_content(soup)
@@ -177,14 +181,26 @@ class UCSBCatalogScraper:
             self.scraped_content[current_url] = page_data
             
             # Add new links to visit but prioritize current section
-            new_links = [link for link in page_data['links'] if link not in self.visited_urls]
-            
+            new_links = []
+            for link in page_data['links']:
+                # Skip links we've already visited
+                if link not in self.visited_urls:
+                    new_links.append(link)
             # Add links from same section to front of queue
             # Gets parent directory of current URL -> keeps related pages together
             current_section = '/'.join(current_url.split('/')[:-1])
-            same_section_links = [link for link in new_links if link.startswith(current_section)]
-            other_links = [link for link in new_links if not link.startswith(current_section)]
-            
+            # Contains links that start w/ current section path
+            # Contains all other links that do NOT mathc current section
+            # Sort new links by whether they're in the same section
+            same_section_links = []
+            other_links = []
+            for link in new_links:
+                # Check if link belongs to current section
+                if link.startswith(current_section):
+                    same_section_links.append(link)
+                else:
+                    other_links.append(link)
+            # List creates
             urls_to_visit = same_section_links + urls_to_visit + other_links
             
             pages_scraped += 1
@@ -209,11 +225,28 @@ class UCSBCatalogScraper:
                 file_path = output_path / "index.txt"
             else:
                 # Create subdirectory structure
-                subdir = output_path / '/'.join(path_parts[:-1]) if len(path_parts) > 1 else output_path
-                # Creates nested directories if non existent
+                if len(path_parts) > 1:
+                    # Create nested directory structure
+                    subdir_path = '/'.join(path_parts[:-1])
+                    subdir = output_path / subdir_path
+                else:
+                    # Use root output directory
+                    subdir = output_path
+
+                # Make sure subdir exists
                 subdir.mkdir(parents=True, exist_ok=True)
+
+                # Determine filename
+                if path_parts[-1]:  # If last part is not empty
+                    filename = path_parts[-1]
+                else:
+                    filename = "index"
                 
+                # Gets last elemtn of list, checks is not None
+                # if path_parts[-1] is not None --> last element is filename
+                # else --> index as filename
                 filename = path_parts[-1] if path_parts[-1] else "index"
+                #joins paths with .txt extension
                 file_path = subdir / f"{filename}.txt"
             
             # Write content to file
@@ -227,11 +260,12 @@ class UCSBCatalogScraper:
         # Save metadata
         with open(output_path / "scraping_metadata.json", 'w') as f:
             json.dump({
-                'total_pages': len(self.scraped_content),
-                'scraped_urls': list(self.scraped_content.keys()),
-                'scraping_completed': time.ctime()
+                'total_pages': len(self.scraped_content), # Count of scraped pages
+                'scraped_urls': list(self.scraped_content.keys()), # Dict keys to list of URLs
+                'scraping_completed': time.ctime() # Converts timestamp to readable string
             }, f, indent=2)
         
+        # Fstring w/ length calculation 
         print(f"Saved {len(self.scraped_content)} pages to {output_dir}/")
 
 def main():
