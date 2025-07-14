@@ -289,7 +289,7 @@ def main():
     ]
     
     # Start scraping
-    scraper.scrape_catalog(max_pages=50, priority_sections=priority_sections)
+    scraper.scrape_catalog(max_pages=150, priority_sections=priority_sections)
     
     # Save results
     scraper.save_to_files("data")
