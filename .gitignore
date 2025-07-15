@@ -46,3 +46,4 @@ $RECYCLE.BIN/
 # Data and embeddings
 data/
 embeddings/
+node_modules/
