@@ -593,12 +593,9 @@ if __name__ == "__main__":
     # Usage example
     cleaner = UCSBDataCleaner(data_dir="data")
     
-    # Optional: Preview cleaning on a sample file first
-    # cleaner.preview_cleaning("computer_science.json", num_samples=3)
-    
     # Run the full cleaning process
     cleaned_data, report = cleaner.run()
     
-    print("\n🎉 Data cleaning completed!")
-    print(f"📁 Check the 'data/cleaned/' directory for results")
-    print(f"📊 Quality report saved for review")
+    print("\nData cleaning completed!")
+    print(f"Check the 'data/cleaned/' directory for results")
+    print(f"Quality report saved for review")
