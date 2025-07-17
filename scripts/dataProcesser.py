@@ -83,9 +83,12 @@ class UCSBDataProcessor:
                 documents.append(course_doc)
         
         print(f"Processed {len(documents)} documents:")
-        print(f"- {len([d for d in documents if d['metadata']['type'] == 'department'])} departments")
-        print(f"- {len([d for d in documents if d['metadata']['type'] == 'program'])} programs")
-        print(f"- {len([d for d in documents if d['metadata']['type'] == 'course'])} courses")
+        dept_count = len([d for d in documents if d['metadata']['type'] == 'department'])
+        prog_count = len([d for d in documents if d['metadata']['type'] == 'program'])
+        course_count = len([d for d in documents if d['metadata']['type'] == 'course'])
+        print(f"- {dept_count} departments")
+        print(f"- {prog_count} programs")
+        print(f"- {course_count} courses")
         
         return documents
     

@@ -44,7 +44,10 @@ class DataValidator:
         
         # Content analysis
         total_chars = sum(len(doc['content']) for doc in documents)
-        avg_chars = total_chars / len(documents) if documents else 0
+        if documents:
+            avg_chars = total_chars / len(documents)
+        else:
+            avg_chars = 0
         
         # Type breakdown
         types = {}

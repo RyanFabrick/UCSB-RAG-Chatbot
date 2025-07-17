@@ -154,10 +154,16 @@ class RAGPipelineTester:
                 # Conditional logic with different thresholds
                 if case["should_be_similar"]:
                     passed = similarity > 0.7  # High similarity threshold
-                    status = "✅" if passed else "❌"
+                    if passed:
+                        status = "✅"
+                    else:
+                        status = "❌"
                 else:
                     passed = similarity < 0.5  # Low similarity threshold
-                    status = "✅" if passed else "❌"
+                    if passed:
+                        status = "✅"
+                    else:
+                        status = "❌"
                 
                 # Appends dict to results list
                 results.append({
@@ -243,7 +249,10 @@ class RAGPipelineTester:
                     
                     # Logical OR - either type or department should match
                     passed = type_match or dept_match
-                    status = "✅" if passed else "❌"
+                    if passed:
+                        status = "✅"
+                    else:
+                        status = "❌"
                     
                     results.append({
                         "query": case["query"],
@@ -335,7 +344,10 @@ Please provide a helpful answer based on the context above."""
                     "passed": quality_score > 0.6  # 60% threshold
                 })
                 
-                status = "✅" if quality_score > 0.6 else "❌"
+                if quality_score > 0.6:
+                    status = "✅"
+                else:
+                    status = "❌"
                 print(f"{status} {query}: Quality score {quality_score:.2f}")
                 
                 time.sleep(2)  # Longer rate limiting for generation
@@ -395,7 +407,10 @@ Please provide a helpful answer based on the context above."""
                         "passed": quality_score > 0.6
                     })
                     
-                    status = "✅" if quality_score > 0.6 else "❌"
+                    if quality_score > 0.6:
+                        status = "✅"
+                    else:
+                        status = "❌"
                     print(f"{status} {query}: {quality_score:.2f} (response: {len(result['response'])} chars, sources: {len(result.get('sources', []))})")
                     
                     time.sleep(2)
@@ -521,11 +536,17 @@ Please provide a helpful answer based on the context above."""
                 total_passed += passed
                 total_tests += total
                 
-                status = "✅" if passed == total else "❌"
+                if passed == total:
+                    status = "✅"
+                else:
+                    status = "❌"
                 # String method chaining for formatting
                 print(f"{status} {test_name.replace('_', ' ').title()}: {passed}/{total} passed")
         
-        overall_status = "PASSED" if total_passed == total_tests else "FAILED"
+        if total_passed == total_tests:
+            overall_status = "PASSED"
+        else:
+            overall_status = "FAILED"
         print(f"\nOVERALL: {overall_status} ({total_passed}/{total_tests} tests)")
         
         return {
@@ -558,4 +579,3 @@ if __name__ == "__main__":
     else:
         print("\nSome tests failed. Check the details above.")
         print("Fix issues before proceeding to frontend integration.")
-

@@ -440,4 +440,3 @@ if __name__ == "__main__":
         print("1. Run embeddings.py to create the ChromaDB collection")
         print("2. Set GOOGLE_API_KEY in your .env file")
         print("3. Installed required packages: google-generativeai, chromadb, python-dotenv")
-
