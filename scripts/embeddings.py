@@ -48,10 +48,10 @@ class GeminiDocumentEmbedder:
             except Exception as e:
                 print(f"Embedding attempt {attempt + 1} failed: {e}")
                 if attempt < retries - 1:
-                    # Rate limiting - (longer waits for Gemini)
+                    # Rate limiting - be gentle with Gemini
                     error_message = str(e).lower()
-                    if "quota" in error_message:
-                        wait_time = 60
+                    if "quota" in error_message or "rate" in error_message:
+                        wait_time = 60  # Wait 1 minute for quota issues
                     else:
                         wait_time = 2 ** attempt
                     print(f"Waiting {wait_time} seconds before retry...")
@@ -90,8 +90,14 @@ class GeminiDocumentEmbedder:
         
         return chunks
     
-    def embed_documents(self, documents_path: str, batch_size: int = 5):
+    def embed_documents(self, documents_path: str = 'data/processed_documents.json', batch_size: int = 5):
         """Embed all documents and store in ChromaDB"""
+        # Check if file exists
+        if not os.path.exists(documents_path):
+            print(f"Error: {documents_path} not found!")
+            print("Please run the data processor first: python scripts/data_processor.py")
+            return
+        
         # Load processed documents
         with open(documents_path, 'r', encoding='utf-8') as f:
             documents = json.load(f)
@@ -99,7 +105,10 @@ class GeminiDocumentEmbedder:
         print(f"Processing {len(documents)} documents...")
         
         # Clear existing collection
-        self.collection.delete()
+        try:
+            self.collection.delete()
+        except:
+            pass  # Collection might be empty
         
         batch_docs = []
         batch_embeddings = []
@@ -190,7 +199,18 @@ class GeminiDocumentEmbedder:
             print(f"Found {len(results['documents'][0])} results:")
             
             for i, (doc, metadata) in enumerate(zip(results['documents'][0], results['metadatas'][0])):
-                print(f"\n{i+1}. {metadata['type'].title()}: {metadata.get('course_code', metadata.get('program', metadata.get('department', 'Unknown')))}")
+                doc_type = metadata['type']
+                if doc_type == 'course':
+                    identifier = metadata.get('course_name', 'Unknown Course')
+                elif doc_type == 'program':
+                    identifier = metadata.get('program', 'Unknown Program')
+                elif doc_type == 'department':
+                    identifier = metadata.get('department', 'Unknown Department')
+                else:
+                    identifier = 'Unknown'
+                
+                print(f"\n{i+1}. {doc_type.title()}: {identifier}")
+                print(f"   Department: {metadata.get('department', 'Unknown')}")
                 print(f"   Preview: {doc[:200]}...")
                 
         except Exception as e:
@@ -201,9 +221,14 @@ if __name__ == "__main__":
     embedder = GeminiDocumentEmbedder()
     
     # Embed documents
-    embedder.embed_documents('data/processed_documents.json')
+    embedder.embed_documents()
     
     # Test retrieval
+    print("\n" + "="*50)
+    print("Testing retrieval with sample queries:")
+    print("="*50)
+    
     embedder.test_retrieval("What computer science courses are available?")
     embedder.test_retrieval("Tell me about the mechanical engineering program")
     embedder.test_retrieval("What are the requirements for electrical engineering?")
+    embedder.test_retrieval("Show me courses about machine learning")
