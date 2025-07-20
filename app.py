@@ -5,6 +5,23 @@ import importlib.util # For importing reponseGenerator.py file
 from typing import Dict, Any, List
 import time
 
+def load_css():
+    """Load CSS from external file"""
+    try:
+        # Get the path to the CSS file
+        css_path = os.path.join(os.path.dirname(__file__), 'styles', 'app.css')
+        
+        # Check if CSS file exists
+        if os.path.exists(css_path):
+            with open(css_path, 'r') as f:
+                css_content = f.read()
+            # Apply the CSS
+            st.markdown(f'<style>{css_content}</style>', unsafe_allow_html=True)
+        else:
+            st.warning(f"CSS file not found at: {css_path}")
+    except Exception as e:
+        st.error(f"Failed to load CSS: {e}")
+
 def load_response_generator():
     """Load responseGenerator module directly using importlib"""
     try:
@@ -44,74 +61,8 @@ st.set_page_config(
     initial_sidebar_state="expanded"          # Sidebar: "auto", "expanded", or "collapsed"
 )
 
-# st.markdown() with unsafe_allow_html=True allows custom CSS/HTML
-st.markdown("""
-<style>
-            
-    .main-header {
-        font-size: 2.5rem;          /* Large text size */
-        color: #003660;             /* UCSB blue color */
-        text-align: center;         /* Center alignment */
-        margin-bottom: 1rem;        /* Space below element */
-        font-weight: bold;          /* Bold text */
-    }
-    
-    .sub-header {
-        font-size: 1.2rem;          /* Medium text size */
-        color: #666;                /* Gray color */
-        text-align: center;         /* Center alignment */
-        margin-bottom: 2rem;        /* More space below */
-    }
-    
-    .chat-message {
-        padding: 1rem;              /* Internal spacing */
-        border-radius: 10px;        /* Rounded corners */
-        margin: 1rem 0;             /* Space above and below */
-        border-left: 4px solid #003660;  /* Left border accent */
-    }
-    
-    .user-message {
-        background-color: #f0f2f6;  /* Light gray background */
-        border-left-color: #003660; /* UCSB blue left border */
-    }
-    
-    .bot-message {
-        background-color: #e8f4fd;  /* Light blue background */
-        border-left-color: #1f77b4; /* Darker blue left border */
-    }
-    
-    .source-item {
-        background-color: #f8f9fa;  /* Very light gray */
-        padding: 0.5rem;            /* Small internal spacing */
-        margin: 0.2rem 0;           /* Small vertical spacing */
-        border-radius: 5px;         /* Slightly rounded corners */
-        border-left: 3px solid #28a745;  /* Green left accent */
-    }
-    
-    .error-message {
-        background-color: #f8d7da;  /* Light red background */
-        color: #721c24;             /* Dark red text */
-        padding: 1rem;              /* Internal spacing */
-        border-radius: 5px;         /* Rounded corners */
-        border-left: 4px solid #dc3545;  /* Red left border */
-    }
-    
-    .success-message {
-        background-color: #d4edda;  /* Light green background */
-        color: #155724;             /* Dark green text */
-        padding: 1rem;              /* Internal spacing */
-        border-radius: 5px;         /* Rounded corners */
-        border-left: 4px solid #28a745;  /* Green left border */
-    }
-    
-    .metrics-container {
-        background-color: #f8f9fa;  /* Light gray background */
-        padding: 1rem;              /* Internal spacing */
-        border-radius: 10px;        /* Rounded corners */
-        margin: 1rem 0;             /* Vertical spacing */
-    }
-</style>
-""", unsafe_allow_html=True)
+# Load external CSS file
+load_css()
 
 # State management
 def initialize_session_state():
