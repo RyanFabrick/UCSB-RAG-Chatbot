@@ -177,30 +177,32 @@ section[data-testid="stSidebar"] h4 {
     font-weight: 500 !important;
 }
 
-/* UPDATED: Sidebar expander styling to match status messages */
-/* Expander header styling - match st.success appearance */
+/* UPDATED: About expander styling to match button appearance */
 .css-1d391kg .streamlit-expanderHeader,
 .css-17eq0hr .streamlit-expanderHeader,
 section[data-testid="stSidebar"] .streamlit-expanderHeader,
 section[data-testid="stSidebar"] div[data-testid="stExpander"] summary {
-    background-color: rgba(212, 237, 218, 0.98) !important;  /* Same as st.success */
-    color: #155724 !important;  /* Same as st.success */
-    border: 2px solid #28a745 !important;  /* Same as st.success */
-    border-radius: 10px !important;
-    font-weight: 600 !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    background-color: #FEBC11 !important;  /* Same as sidebar buttons */
+    color: #003660 !important;  /* Same as sidebar buttons */
+    border: 2px solid #FEBC11 !important;  /* Same as sidebar buttons */
+    border-radius: 8px !important;  /* Same as sidebar buttons */
+    font-weight: 600 !important;  /* Same as sidebar buttons */
+    transition: all 0.3s ease !important;  /* Same as sidebar buttons */
+    box-shadow: none !important;  /* Remove previous shadow */
     margin: 0.5rem 0 !important;
     padding: 0.75rem 1rem !important;
 }
 
-/* Expander header hover effect */
+/* About expander header hover effect - match button hover */
 .css-1d391kg .streamlit-expanderHeader:hover,
 .css-17eq0hr .streamlit-expanderHeader:hover,
 section[data-testid="stSidebar"] .streamlit-expanderHeader:hover,
 section[data-testid="stSidebar"] div[data-testid="stExpander"] summary:hover {
-    background-color: rgba(212, 237, 218, 1) !important;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+    background-color: white !important;  /* Same as sidebar button hover */
+    color: #003660 !important;  /* Same as sidebar button hover */
+    border-color: white !important;  /* Same as sidebar button hover */
+    transform: translateY(-1px) !important;  /* Same as sidebar button hover */
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3) !important;  /* Same as sidebar button hover */
 }
 
 /* Expander content styling */
@@ -210,9 +212,9 @@ section[data-testid="stSidebar"] .streamlit-expanderContent,
 section[data-testid="stSidebar"] div[data-testid="stExpander"] div[role="region"] {
     background-color: rgba(0, 54, 96, 0.95) !important;
     color: white !important;
-    border: 2px solid #28a745 !important;
+    border: 2px solid #FEBC11 !important;  /* Match expander header border */
     border-top: none !important;
-    border-radius: 0 0 10px 10px !important;
+    border-radius: 0 0 8px 8px !important;  /* Match button border radius */
     padding: 1rem !important;
     margin-top: -2px !important;
 }
@@ -287,7 +289,7 @@ section[data-testid="stSidebar"] .stInfo {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Sidebar button styling - keep existing behavior */
+/* ALL SIDEBAR BUTTON STYLING - applies to sample questions, clear chat, restart system */
 .css-1d391kg .stButton > button, .css-17eq0hr .stButton > button,
 section[data-testid="stSidebar"] .stButton > button {
     background-color: #FEBC11 !important;
@@ -342,12 +344,12 @@ section[data-testid="stSidebar"] h4 {
     font-weight: bold !important;
 }
 
-/* Exception: Expander headers should use the success message colors */
+/* Exception: Expander headers should use the button colors (gold background, navy text) */
 .css-1d391kg .streamlit-expanderHeader *,
 .css-17eq0hr .streamlit-expanderHeader *,
 section[data-testid="stSidebar"] .streamlit-expanderHeader *,
 section[data-testid="stSidebar"] div[data-testid="stExpander"] summary * {
-    color: #155724 !important;  /* Success message color */
+    color: #003660 !important;  /* Navy text like buttons */
     font-weight: 600 !important;
 }
 
