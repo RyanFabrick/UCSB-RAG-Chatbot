@@ -1,62 +1,391 @@
+/* Main app background styling with UCSB gold */
+.stApp {
+    background-color: #FEBC11 !important;  /* UCSB official gold */
+}
+
+/* Sidebar styling with UCSB blue */
+.css-1d391kg, .css-17eq0hr {
+    background-color: #003660 !important;  /* UCSB official navy blue */
+}
+
+/* Alternative sidebar selectors (Streamlit versions may vary) */
+section[data-testid="stSidebar"] {
+    background-color: #003660 !important;  /* UCSB official navy blue */
+    color: white !important;  /* White text for contrast */
+}
+
+/* Sidebar text styling - comprehensive coverage */
+.css-1d391kg .stMarkdown, .css-17eq0hr .stMarkdown,
+.css-1d391kg .stMarkdown p, .css-17eq0hr .stMarkdown p,
+.css-1d391kg .stText, .css-17eq0hr .stText,
+.css-1d391kg div, .css-17eq0hr div,
+section[data-testid="stSidebar"] .stMarkdown,
+section[data-testid="stSidebar"] .stMarkdown p,
+section[data-testid="stSidebar"] .stText,
+section[data-testid="stSidebar"] div,
+section[data-testid="stSidebar"] span,
+section[data-testid="stSidebar"] li {
+    color: white !important;
+}
+
+/* Sidebar headers */
+.css-1d391kg h1, .css-1d391kg h2, .css-1d391kg h3, .css-1d391kg h4,
+.css-17eq0hr h1, .css-17eq0hr h2, .css-17eq0hr h3, .css-17eq0hr h4,
+section[data-testid="stSidebar"] h1,
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3,
+section[data-testid="stSidebar"] h4 {
+    color: #FEBC11 !important;  /* Gold headers in sidebar */
+    font-weight: bold !important;
+}
+
+/* Main content area styling for better readability */
+.main .block-container {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 15px;
+    padding: 2rem !important;
+    margin-top: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
 .main-header {
-    font-size: 2.5rem;          /* Large text size */
-    color: #003660;             /* UCSB blue color */
-    text-align: center;         /* Center alignment */
-    margin-bottom: 1rem;        /* Space below element */
-    font-weight: bold;          /* Bold text */
+    font-size: 2.5rem;
+    color: #003660;             /* UCSB navy blue */
+    text-align: center;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .sub-header {
-    font-size: 1.2rem;          /* Medium text size */
-    color: #666;                /* Gray color */
-    text-align: center;         /* Center alignment */
-    margin-bottom: 2rem;        /* More space below */
+    font-size: 1.2rem;
+    color: #003660;             /* UCSB navy blue for better contrast */
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+/* Status message styling for better visibility */
+.stAlert {
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 10px !important;
+    border: 2px solid #003660 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Success messages (green) with better visibility */
+.stSuccess {
+    background-color: rgba(212, 237, 218, 0.98) !important;
+    color: #155724 !important;
+    border: 2px solid #28a745 !important;
+    font-weight: 600 !important;
+}
+
+/* Info messages with UCSB blue theme */
+.stInfo {
+    background-color: rgba(179, 205, 224, 0.98) !important;
+    color: #003660 !important;
+    border: 2px solid #003660 !important;
+    font-weight: 600 !important;
+}
+
+/* Error messages */
+.stError {
+    background-color: rgba(248, 215, 218, 0.98) !important;
+    color: #721c24 !important;
+    border: 2px solid #dc3545 !important;
+    font-weight: 600 !important;
+}
+
+/* Warning messages */
+.stWarning {
+    background-color: rgba(255, 243, 205, 0.98) !important;
+    color: #856404 !important;
+    border: 2px solid #ffc107 !important;
+    font-weight: 600 !important;
 }
 
 .chat-message {
-    padding: 1rem;              /* Internal spacing */
-    border-radius: 10px;        /* Rounded corners */
-    margin: 1rem 0;             /* Space above and below */
-    border-left: 4px solid #003660;  /* Left border accent */
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+    border-left: 4px solid #003660;
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .user-message {
-    background-color: #f0f2f6;  /* Light gray background */
-    border-left-color: #003660; /* UCSB blue left border */
+    background-color: rgba(254, 188, 17, 0.15);  /* Light UCSB gold tint */
+    border-left-color: #003660;
+    border: 1px solid rgba(0, 54, 96, 0.2);
 }
 
 .bot-message {
-    background-color: #e8f4fd;  /* Light blue background */
-    border-left-color: #1f77b4; /* Darker blue left border */
+    background-color: rgba(0, 54, 96, 0.08);  /* Light UCSB blue tint */
+    border-left-color: #FEBC11;
+    border: 1px solid rgba(254, 188, 17, 0.3);
 }
 
 .source-item {
-    background-color: #f8f9fa;  /* Very light gray */
-    padding: 0.5rem;            /* Small internal spacing */
-    margin: 0.2rem 0;           /* Small vertical spacing */
-    border-radius: 5px;         /* Slightly rounded corners */
-    border-left: 3px solid #28a745;  /* Green left accent */
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 0.75rem;
+    margin: 0.3rem 0;
+    border-radius: 8px;
+    border-left: 4px solid #FEBC11;  /* UCSB gold accent */
+    border: 1px solid rgba(0, 54, 96, 0.2);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .error-message {
-    background-color: #f8d7da;  /* Light red background */
-    color: #721c24;             /* Dark red text */
-    padding: 1rem;              /* Internal spacing */
-    border-radius: 5px;         /* Rounded corners */
-    border-left: 4px solid #dc3545;  /* Red left border */
+    background-color: rgba(248, 215, 218, 0.98);
+    color: #721c24;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #dc3545;
+    border: 1px solid #dc3545;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .success-message {
-    background-color: #d4edda;  /* Light green background */
-    color: #155724;             /* Dark green text */
-    padding: 1rem;              /* Internal spacing */
-    border-radius: 5px;         /* Rounded corners */
-    border-left: 4px solid #28a745;  /* Green left border */
+    background-color: rgba(212, 237, 218, 0.98);
+    color: #155724;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #28a745;
+    border: 1px solid #28a745;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .metrics-container {
-    background-color: #f8f9fa;  /* Light gray background */
-    padding: 1rem;              /* Internal spacing */
-    border-radius: 10px;        /* Rounded corners */
-    margin: 1rem 0;             /* Vertical spacing */
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+    border: 2px solid #003660;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Chat input styling for better visibility on gold background */
+.stChatInput > div {
+    background-color: rgba(255, 255, 255, 0.98) !important;
+    border: 2px solid #003660 !important;
+    border-radius: 25px !important;
+}
+
+.stChatInput input {
+    color: #003660 !important;
+    font-weight: 500 !important;
+}
+
+/* Sidebar expander styling for better contrast */
+.css-1d391kg .streamlit-expanderHeader,
+.css-17eq0hr .streamlit-expanderHeader,
+section[data-testid="stSidebar"] .streamlit-expanderHeader {
+    background-color: rgba(254, 188, 17, 0.9) !important;  /* Gold background */
+    color: #003660 !important;  /* Navy text */
+    border: 1px solid #FEBC11 !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+}
+
+/* Sidebar expander content */
+.css-1d391kg .streamlit-expanderContent,
+.css-17eq0hr .streamlit-expanderContent,
+section[data-testid="stSidebar"] .streamlit-expanderContent {
+    background-color: rgba(0, 54, 96, 0.95) !important;
+    color: white !important;
+}
+
+/* Alert messages in sidebar - consistent gold styling */
+.css-1d391kg .stAlert, .css-17eq0hr .stAlert,
+section[data-testid="stSidebar"] .stAlert,
+.css-1d391kg .stSuccess, .css-17eq0hr .stSuccess,
+section[data-testid="stSidebar"] .stSuccess,
+.css-1d391kg .stError, .css-17eq0hr .stError,
+section[data-testid="stSidebar"] .stError,
+.css-1d391kg .stWarning, .css-17eq0hr .stWarning,
+section[data-testid="stSidebar"] .stWarning,
+.css-1d391kg .stInfo, .css-17eq0hr .stInfo,
+section[data-testid="stSidebar"] .stInfo {
+    background-color: rgba(254, 188, 17, 0.9) !important;
+    color: #003660 !important;
+    border: 2px solid #FEBC11 !important;
+    font-weight: 600 !important;
+}
+
+/* CUSTOM SIDEBAR SECTIONS STYLING - Match status message appearance */
+/* About Section */
+.sidebar-about, 
+.css-1d391kg .sidebar-about, .css-17eq0hr .sidebar-about,
+section[data-testid="stSidebar"] .sidebar-about {
+    background-color: rgba(254, 188, 17, 0.9) !important;
+    color: #003660 !important;
+    border: 2px solid #FEBC11 !important;
+    border-radius: 10px !important;
+    padding: 1rem !important;
+    margin: 0.5rem 0 !important;
+    font-weight: 600 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Chat Controls Section */
+.sidebar-chat-controls,
+.css-1d391kg .sidebar-chat-controls, .css-17eq0hr .sidebar-chat-controls,
+section[data-testid="stSidebar"] .sidebar-chat-controls {
+    background-color: rgba(254, 188, 17, 0.9) !important;
+    color: #003660 !important;
+    border: 2px solid #FEBC11 !important;
+    border-radius: 10px !important;
+    padding: 1rem !important;
+    margin: 0.5rem 0 !important;
+    font-weight: 600 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Sample Questions Section */
+.sidebar-sample-questions,
+.css-1d391kg .sidebar-sample-questions, .css-17eq0hr .sidebar-sample-questions,
+section[data-testid="stSidebar"] .sidebar-sample-questions {
+    background-color: rgba(254, 188, 17, 0.9) !important;
+    color: #003660 !important;
+    border: 2px solid #FEBC11 !important;
+    border-radius: 10px !important;
+    padding: 1rem !important;
+    margin: 0.5rem 0 !important;
+    font-weight: 600 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Ensure text within these sections maintains proper styling */
+.sidebar-about *, .sidebar-chat-controls *, .sidebar-sample-questions *,
+.css-1d391kg .sidebar-about *, .css-17eq0hr .sidebar-about *,
+.css-1d391kg .sidebar-chat-controls *, .css-17eq0hr .sidebar-chat-controls *,
+.css-1d391kg .sidebar-sample-questions *, .css-17eq0hr .sidebar-sample-questions *,
+section[data-testid="stSidebar"] .sidebar-about *,
+section[data-testid="stSidebar"] .sidebar-chat-controls *,
+section[data-testid="stSidebar"] .sidebar-sample-questions * {
+    color: #003660 !important;
+    font-weight: 600 !important;
+}
+
+/* Headers within these sections should remain navy but bold */
+.sidebar-about h1, .sidebar-about h2, .sidebar-about h3, .sidebar-about h4,
+.sidebar-chat-controls h1, .sidebar-chat-controls h2, .sidebar-chat-controls h3, .sidebar-chat-controls h4,
+.sidebar-sample-questions h1, .sidebar-sample-questions h2, .sidebar-sample-questions h3, .sidebar-sample-questions h4,
+.css-1d391kg .sidebar-about h1, .css-1d391kg .sidebar-about h2, .css-1d391kg .sidebar-about h3, .css-1d391kg .sidebar-about h4,
+.css-17eq0hr .sidebar-about h1, .css-17eq0hr .sidebar-about h2, .css-17eq0hr .sidebar-about h3, .css-17eq0hr .sidebar-about h4,
+.css-1d391kg .sidebar-chat-controls h1, .css-1d391kg .sidebar-chat-controls h2, .css-1d391kg .sidebar-chat-controls h3, .css-1d391kg .sidebar-chat-controls h4,
+.css-17eq0hr .sidebar-chat-controls h1, .css-17eq0hr .sidebar-chat-controls h2, .css-17eq0hr .sidebar-chat-controls h3, .css-17eq0hr .sidebar-chat-controls h4,
+.css-1d391kg .sidebar-sample-questions h1, .css-1d391kg .sidebar-sample-questions h2, .css-1d391kg .sidebar-sample-questions h3, .css-1d391kg .sidebar-sample-questions h4,
+.css-17eq0hr .sidebar-sample-questions h1, .css-17eq0hr .sidebar-sample-questions h2, .css-17eq0hr .sidebar-sample-questions h3, .css-17eq0hr .sidebar-sample-questions h4,
+section[data-testid="stSidebar"] .sidebar-about h1, section[data-testid="stSidebar"] .sidebar-about h2, section[data-testid="stSidebar"] .sidebar-about h3, section[data-testid="stSidebar"] .sidebar-about h4,
+section[data-testid="stSidebar"] .sidebar-chat-controls h1, section[data-testid="stSidebar"] .sidebar-chat-controls h2, section[data-testid="stSidebar"] .sidebar-chat-controls h3, section[data-testid="stSidebar"] .sidebar-chat-controls h4,
+section[data-testid="stSidebar"] .sidebar-sample-questions h1, section[data-testid="stSidebar"] .sidebar-sample-questions h2, section[data-testid="stSidebar"] .sidebar-sample-questions h3, section[data-testid="stSidebar"] .sidebar-sample-questions h4 {
+    color: #003660 !important;
+    font-weight: bold !important;
+}
+
+/* Button styling adjustments */
+.stButton > button {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 2px solid #003660;
+    color: #003660;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.stButton > button:hover {
+    background-color: #003660;
+    color: #FEBC11;
+    border-color: #003660;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Sidebar button styling */
+.css-1d391kg .stButton > button, .css-17eq0hr .stButton > button {
+    background-color: #FEBC11 !important;
+    color: #003660 !important;
+    border: 2px solid #FEBC11 !important;
+    font-weight: 600 !important;
+}
+
+.css-1d391kg .stButton > button:hover, .css-17eq0hr .stButton > button:hover {
+    background-color: white !important;
+    color: #003660 !important;
+    border-color: white !important;
+}
+
+/* Buttons within custom sidebar sections */
+.sidebar-about .stButton > button, .sidebar-chat-controls .stButton > button, .sidebar-sample-questions .stButton > button,
+.css-1d391kg .sidebar-about .stButton > button, .css-17eq0hr .sidebar-about .stButton > button,
+.css-1d391kg .sidebar-chat-controls .stButton > button, .css-17eq0hr .sidebar-chat-controls .stButton > button,
+.css-1d391kg .sidebar-sample-questions .stButton > button, .css-17eq0hr .sidebar-sample-questions .stButton > button,
+section[data-testid="stSidebar"] .sidebar-about .stButton > button,
+section[data-testid="stSidebar"] .sidebar-chat-controls .stButton > button,
+section[data-testid="stSidebar"] .sidebar-sample-questions .stButton > button {
+    background-color: #003660 !important;
+    color: #FEBC11 !important;
+    border: 2px solid #003660 !important;
+    font-weight: 600 !important;
+}
+
+.sidebar-about .stButton > button:hover, .sidebar-chat-controls .stButton > button:hover, .sidebar-sample-questions .stButton > button:hover,
+.css-1d391kg .sidebar-about .stButton > button:hover, .css-17eq0hr .sidebar-about .stButton > button:hover,
+.css-1d391kg .sidebar-chat-controls .stButton > button:hover, .css-17eq0hr .sidebar-chat-controls .stButton > button:hover,
+.css-1d391kg .sidebar-sample-questions .stButton > button:hover, .css-17eq0hr .sidebar-sample-questions .stButton > button:hover,
+section[data-testid="stSidebar"] .sidebar-about .stButton > button:hover,
+section[data-testid="stSidebar"] .sidebar-chat-controls .stButton > button:hover,
+section[data-testid="stSidebar"] .sidebar-sample-questions .stButton > button:hover {
+    background-color: white !important;
+    color: #003660 !important;
+    border-color: white !important;
+}
+
+/* Metric styling */
+.stMetric {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    padding: 1rem !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba(0, 54, 96, 0.2) !important;
+}
+
+.stMetric label {
+    color: #003660 !important;
+    font-weight: 600 !important;
+}
+
+.stMetric div[data-testid="metric-container"] > div {
+    color: #003660 !important;
+    font-weight: bold !important;
+}
+
+/* Override any remaining dark text in sidebar */
+.css-1d391kg *, .css-17eq0hr *,
+section[data-testid="stSidebar"] * {
+    color: white !important;
+}
+
+/* But keep headers gold */
+.css-1d391kg h1, .css-1d391kg h2, .css-1d391kg h3, .css-1d391kg h4,
+.css-17eq0hr h1, .css-17eq0hr h2, .css-17eq0hr h3, .css-17eq0hr h4,
+section[data-testid="stSidebar"] h1,
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3,
+section[data-testid="stSidebar"] h4 {
+    color: #FEBC11 !important;  /* Gold headers in sidebar */
+    font-weight: bold !important;
+}
+
+/* And button text should be navy on gold buttons */
+.css-1d391kg .stButton > button, .css-17eq0hr .stButton > button,
+section[data-testid="stSidebar"] .stButton > button {
+    color: #003660 !important;
+}
+
+/* Caption text */
+.stCaption {
+    color: #666 !important;
+    font-weight: 500 !important;
 }
