@@ -304,75 +304,6 @@ section[data-testid="stSidebar"] .stButton > button {
     box-shadow: none !important;  /* No shadow initially like About expander */
 }
 
-/* UPDATED: Sidebar button hover - exact match to About expander hover */
-.css-1d391kg .stButton > button:hover, .css-17eq0hr .stButton > button:hover,
-section[data-testid="stSidebar"] .stButton > button:hover {
-    background-color: white !important;  /* White background on hover like About expander */
-    color: #003660 !important;  /* Navy text stays same like About expander */
-    border-color: white !important;  /* White border on hover like About expander */
-    transform: translateY(-1px) !important;  /* Same lift effect as About expander */
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3) !important;  /* Same white shadow as About expander */
-}
-
-/* ENHANCED: Additional specificity for sample question buttons using their key pattern */
-.css-1d391kg .stButton[data-testid*="sample_"] > button, 
-.css-17eq0hr .stButton[data-testid*="sample_"] > button,
-section[data-testid="stSidebar"] .stButton[data-testid*="sample_"] > button,
-.css-1d391kg button[data-testid*="sample_"],
-.css-17eq0hr button[data-testid*="sample_"],
-section[data-testid="stSidebar"] button[data-testid*="sample_"] {
-    background-color: #FEBC11 !important;  /* Gold background */
-    color: #003660 !important;  /* Navy text */
-    border: 2px solid #FEBC11 !important;  /* Gold border */
-    font-weight: 600 !important;  /* Bold text */
-    border-radius: 8px !important;  /* Same border radius */
-    transition: all 0.3s ease !important;  /* Same transition */
-    margin: 0.5rem 0 !important;  /* Same margin */
-    padding: 0.75rem 1rem !important;  /* Same padding */
-    width: 100% !important;  /* Full width */
-    box-shadow: none !important;  /* No shadow initially */
-}
-
-/* ENHANCED: Sample question button hover with additional specificity */
-.css-1d391kg .stButton[data-testid*="sample_"] > button:hover,
-.css-17eq0hr .stButton[data-testid*="sample_"] > button:hover,
-section[data-testid="stSidebar"] .stButton[data-testid*="sample_"] > button:hover,
-.css-1d391kg button[data-testid*="sample_"]:hover,
-.css-17eq0hr button[data-testid*="sample_"]:hover,
-section[data-testid="stSidebar"] button[data-testid*="sample_"]:hover {
-    background-color: white !important;  /* White background on hover */
-    color: #003660 !important;  /* Navy text stays same */
-    border-color: white !important;  /* White border on hover */
-    transform: translateY(-1px) !important;  /* Same lift effect */
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3) !important;  /* Same white shadow */
-}
-
-/* ADDITIONAL: Even more specific targeting for all buttons in sidebar */
-.css-1d391kg [data-baseweb="button"],
-.css-17eq0hr [data-baseweb="button"],
-section[data-testid="stSidebar"] [data-baseweb="button"] {
-    background-color: #FEBC11 !important;
-    color: #003660 !important;
-    border: 2px solid #FEBC11 !important;
-    font-weight: 600 !important;
-    border-radius: 8px !important;
-    transition: all 0.3s ease !important;
-    margin: 0.5rem 0 !important;
-    padding: 0.75rem 1rem !important;
-    width: 100% !important;
-    box-shadow: none !important;
-}
-
-.css-1d391kg [data-baseweb="button"]:hover,
-.css-17eq0hr [data-baseweb="button"]:hover,
-section[data-testid="stSidebar"] [data-baseweb="button"]:hover {
-    background-color: white !important;
-    color: #003660 !important;
-    border-color: white !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3) !important;
-}
-
 /* Metric styling */
 .stMetric {
     background-color: rgba(255, 255, 255, 0.9) !important;
@@ -417,19 +348,65 @@ section[data-testid="stSidebar"] div[data-testid="stExpander"] summary * {
     font-weight: 600 !important;
 }
 
-/* Button Text - Enhanced specificity */
+/* Caption text */
+.stCaption {
+    color: #666 !important;
+    font-weight: 500 !important;
+}
+
+/* SIMPLIFIED AND UNIFIED: All sidebar buttons get the same styling */
+
+/* Universal sidebar button styling - catches ALL buttons in sidebar */
+.css-1d391kg .stButton > button, 
+.css-17eq0hr .stButton > button,
+section[data-testid="stSidebar"] .stButton > button,
+.css-1d391kg [data-baseweb="button"],
+.css-17eq0hr [data-baseweb="button"],
+section[data-testid="stSidebar"] [data-baseweb="button"],
+/* Additional catch-all selectors */
+.css-1d391kg button,
+.css-17eq0hr button,
+section[data-testid="stSidebar"] button {
+    background-color: #FEBC11 !important;  /* Gold background */
+    color: #003660 !important;  /* Navy text */
+    border: 2px solid #FEBC11 !important;  /* Gold border */
+    font-weight: 600 !important;  /* Bold text */
+    border-radius: 8px !important;  
+    transition: all 0.3s ease !important;  
+    margin: 0.5rem 0 !important;  
+    padding: 0.75rem 1rem !important;  
+    width: 100% !important;  
+    box-shadow: none !important;  
+}
+
+/* Universal sidebar button hover styling */
+.css-1d391kg .stButton > button:hover,
+.css-17eq0hr .stButton > button:hover,
+section[data-testid="stSidebar"] .stButton > button:hover,
+.css-1d391kg [data-baseweb="button"]:hover,
+.css-17eq0hr [data-baseweb="button"]:hover,
+section[data-testid="stSidebar"] [data-baseweb="button"]:hover,
+/* Additional catch-all selectors */
+.css-1d391kg button:hover,
+.css-17eq0hr button:hover,
+section[data-testid="stSidebar"] button:hover {
+    background-color: white !important;  /* White background on hover */
+    color: #003660 !important;  /* Navy text stays same */
+    border-color: white !important;  /* White border on hover */
+    transform: translateY(-1px) !important;  /* Lift effect */
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3) !important;  /* White shadow */
+}
+
+/* Ensure button text is styled correctly */
+.css-1d391kg button *,
+.css-17eq0hr button *,
+section[data-testid="stSidebar"] button *,
 .css-1d391kg .stButton > button *,
 .css-17eq0hr .stButton > button *,
 section[data-testid="stSidebar"] .stButton > button *,
 .css-1d391kg [data-baseweb="button"] *,
 .css-17eq0hr [data-baseweb="button"] *,
 section[data-testid="stSidebar"] [data-baseweb="button"] * {
-    color: #003660 !important;  /* Navy text like expander headers */
+    color: #003660 !important;  /* Navy text */
     font-weight: 600 !important;
-}
-
-/* Caption text */
-.stCaption {
-    color: #666 !important;
-    font-weight: 500 !important;
 }
