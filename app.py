@@ -303,60 +303,59 @@ def display_sidebar():
         # st.markdown("---") --> horizontal divider line
         st.markdown("---")
         
-        # Sample questions section
-        st.markdown("### Sample Questions")
-        sample_questions = [
-            "What CS courses are available?",
-            "Tell me about the ME program",
-            "Prerequisites for ECE 10A?",
-            "Computer Engineering requirements",
-            "Materials department courses"
-        ]
-        
-        # Create buttons for each sample question
-        for question in sample_questions:
-            # st.button() creates clickable button
-            # key parameter for unique identifier per button
-            # hash() creates unique key from question text
-            # help parameter shows tooltip on hover
-            if st.button(question, key=f"sample_{hash(question)}", help="Click to ask this question"):
-                # Add question to chat history when clicked
-                st.session_state.messages.append({"role": "user", "content": question})
-                # st.rerun() triggers app to rerun and show the new message
-                st.rerun()
+        # Sample questions section - NOW WRAPPED IN EXPANDER
+        with st.expander("Sample Questions"):
+            sample_questions = [
+                "What CS courses are available?",
+                "Tell me about the ME program",
+                "Prerequisites for ECE 10A?",
+                "Computer Engineering requirements",
+                "Materials department courses"
+            ]
+            
+            # Create buttons for each sample question
+            for question in sample_questions:
+                # st.button() creates clickable button
+                # key parameter for unique identifier per button
+                # hash() creates unique key from question text
+                # help parameter shows tooltip on hover
+                if st.button(question, key=f"sample_{hash(question)}", help="Click to ask this question"):
+                    # Add question to chat history when clicked
+                    st.session_state.messages.append({"role": "user", "content": question})
+                    # st.rerun() triggers app to rerun and show the new message
+                    st.rerun()
         
         st.markdown("---")
         
         # Chat controls section
-        st.markdown("### Chat Controls")
-        
-        # Clear chat history button
-        if st.button("Clear Chat History"):
-            st.session_state.messages = []  # Empty the messages list
-            st.rerun()  # Rerun to show changes
-        
-        # Restart system button
-        if st.button("Restart System"):
-            # Reset all session state by deleting all keys
-            for key in list(st.session_state.keys()):
-                del st.session_state[key]
-            st.rerun()
-        
-        # Export chat functionality
-        if len(st.session_state.messages) > 0:  # Only shows if messages are there
-            if st.button("Export Chat"):
-                # Create export data structure
-                chat_export = {
-                    "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
-                    "messages": st.session_state.messages
-                }
-                # st.download_button() creates download button
-                st.download_button(
-                    "Download Chat History",
-                    data=str(chat_export),  # Convert to string for download
-                    file_name=f"ucsb_chat_{time.strftime('%Y%m%d_%H%M%S')}.txt",
-                    mime="text/plain"  # MIME type for text file
-                )
+        with st.expander("Chat Controls"):
+            # Clear chat history button
+            if st.button("Clear Chat History"):
+                st.session_state.messages = []  # Empty the messages list
+                st.rerun()  # Rerun to show changes
+            
+            # Restart system button
+            if st.button("Restart System"):
+                # Reset all session state by deleting all keys
+                for key in list(st.session_state.keys()):
+                    del st.session_state[key]
+                st.rerun()
+            
+            # Export chat functionality
+            if len(st.session_state.messages) > 0:  # Only shows if messages are there
+                if st.button("Export Chat"):
+                    # Create export data structure
+                    chat_export = {
+                        "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+                        "messages": st.session_state.messages
+                    }
+                    # st.download_button() creates download button
+                    st.download_button(
+                        "Download Chat History",
+                        data=str(chat_export),  # Convert to string for download
+                        file_name=f"ucsb_chat_{time.strftime('%Y%m%d_%H%M%S')}.txt",
+                        mime="text/plain"  # MIME type for text file
+                    )
         
         st.markdown("---")
         
@@ -380,7 +379,7 @@ def display_sidebar():
             - Vector DB: ChromaDB
             - Embeddings: Google Embedding-001
             """)
-
+            
 # Main application
 def main():
     """

@@ -23,7 +23,7 @@ load_dotenv()
 
 class GeminiResponseGenerator:
     """
-    andles RAG (Retrieval-Augmented Generation) system
+    Handles RAG (Retrieval-Augmented Generation) system
     - Connects to ChromaDB for document retrieval
     - Uses Gemini LLM for response generation
     - Implements retry logic for API calls

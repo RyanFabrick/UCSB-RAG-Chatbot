@@ -191,6 +191,7 @@ section[data-testid="stSidebar"] div[data-testid="stExpander"] summary {
     box-shadow: none !important;
     margin: 0.5rem 0 !important;
     padding: 0.75rem 1rem !important;
+    text-align: center !important;  /* CENTER TEXT IN ABOUT EXPANDER */
 }
 
 /* About expander header hover effect - match button hover */
@@ -217,14 +218,16 @@ section[data-testid="stSidebar"] div[data-testid="stExpander"] div[role="region"
     border-radius: 0 0 8px 8px !important;
     padding: 1rem !important;
     margin-top: -2px !important;
+    text-align: center !important;  /* CENTER TEXT IN ABOUT EXPANDER CONTENT */
 }
 
-/* Ensure expander content text is white */
+/* Ensure expander content text is white and centered */
 .css-1d391kg .streamlit-expanderContent *,
 .css-17eq0hr .streamlit-expanderContent *,
 section[data-testid="stSidebar"] .streamlit-expanderContent *,
 section[data-testid="stSidebar"] div[data-testid="stExpander"] div[role="region"] * {
     color: white !important;
+    text-align: center !important;  /* CENTER ALL TEXT IN ABOUT EXPANDER */
 }
 
 /* Alert messages in sidebar - consistent with main area styling */
@@ -289,21 +292,6 @@ section[data-testid="stSidebar"] .stInfo {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* UPDATED: ALL SIDEBAR BUTTON STYLING - Now matches About expander exactly */
-.css-1d391kg .stButton > button, .css-17eq0hr .stButton > button,
-section[data-testid="stSidebar"] .stButton > button {
-    background-color: #FEBC11 !important;  /* Gold background like About expander */
-    color: #003660 !important;  /* Navy text like About expander */
-    border: 2px solid #FEBC11 !important;  /* Gold border like About expander */
-    font-weight: 600 !important;  /* Bold text like About expander */
-    border-radius: 8px !important;  /* Same border radius */
-    transition: all 0.3s ease !important;  /* Same transition */
-    margin: 0.5rem 0 !important;  /* Same margin as About expander */
-    padding: 0.75rem 1rem !important;  /* Same padding as About expander */
-    width: 100% !important;  /* Full width like About expander */
-    box-shadow: none !important;  /* No shadow initially like About expander */
-}
-
 /* Metric styling */
 .stMetric {
     background-color: rgba(255, 255, 255, 0.9) !important;
@@ -346,6 +334,7 @@ section[data-testid="stSidebar"] .streamlit-expanderHeader *,
 section[data-testid="stSidebar"] div[data-testid="stExpander"] summary * {
     color: #003660 !important;  /* Navy text like buttons */
     font-weight: 600 !important;
+    text-align: center !important;  /* CENTER EXPANDER HEADER TEXT */
 }
 
 /* Caption text */
@@ -354,7 +343,7 @@ section[data-testid="stSidebar"] div[data-testid="stExpander"] summary * {
     font-weight: 500 !important;
 }
 
-/* SIMPLIFIED AND UNIFIED: All sidebar buttons get the same styling */
+/* UNIVERSAL SIDEBAR BUTTON STYLING - All buttons get consistent sizing and styling */
 
 /* Universal sidebar button styling - catches ALL buttons in sidebar */
 .css-1d391kg .stButton > button, 
@@ -373,10 +362,16 @@ section[data-testid="stSidebar"] button {
     font-weight: 600 !important;  /* Bold text */
     border-radius: 8px !important;  
     transition: all 0.3s ease !important;  
-    margin: 0.5rem 0 !important;  
-    padding: 0.75rem 1rem !important;  
-    width: 100% !important;  
-    box-shadow: none !important;  
+    margin: 0.25rem 0 !important;  /* REDUCED MARGIN FOR TIGHTER SPACING */
+    padding: 0.75rem 1rem !important;  /* CONSISTENT PADDING */
+    width: 100% !important;  /* FULL WIDTH FOR ALL BUTTONS */
+    min-height: 48px !important;  /* CONSISTENT MINIMUM HEIGHT */
+    box-shadow: none !important;
+    display: flex !important;  /* FLEX DISPLAY FOR PROPER ALIGNMENT */
+    align-items: center !important;  /* CENTER CONTENT VERTICALLY */
+    justify-content: center !important;  /* CENTER CONTENT HORIZONTALLY */
+    text-align: center !important;  /* CENTER TEXT */
+    box-sizing: border-box !important;  /* ENSURE PROPER SIZING */
 }
 
 /* Universal sidebar button hover styling */
@@ -397,6 +392,28 @@ section[data-testid="stSidebar"] button:hover {
     box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3) !important;  /* White shadow */
 }
 
+/* SPECIFIC STYLING FOR SAMPLE QUESTION BUTTONS - Ensure they match other buttons */
+.css-1d391kg .stButton > button[key*="sample"],
+.css-17eq0hr .stButton > button[key*="sample"],
+section[data-testid="stSidebar"] .stButton > button[key*="sample"] {
+    background-color: #FEBC11 !important;
+    color: #003660 !important;
+    border: 2px solid #FEBC11 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+    margin: 0.25rem 0 !important;
+    padding: 0.75rem 1rem !important;
+    width: 100% !important;
+    min-height: 48px !important;
+    box-shadow: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+}
+
 /* Ensure button text is styled correctly */
 .css-1d391kg button *,
 .css-17eq0hr button *,
@@ -409,4 +426,37 @@ section[data-testid="stSidebar"] .stButton > button *,
 section[data-testid="stSidebar"] [data-baseweb="button"] * {
     color: #003660 !important;  /* Navy text */
     font-weight: 600 !important;
+    text-align: center !important;  /* CENTER BUTTON TEXT */
+}
+
+/* ENSURE DOWNLOAD BUTTON AND OTHER SPECIAL BUTTONS ALSO GET CONSISTENT STYLING */
+.css-1d391kg .stDownloadButton > button,
+.css-17eq0hr .stDownloadButton > button,
+section[data-testid="stSidebar"] .stDownloadButton > button {
+    background-color: #FEBC11 !important;
+    color: #003660 !important;
+    border: 2px solid #FEBC11 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+    margin: 0.25rem 0 !important;
+    padding: 0.75rem 1rem !important;
+    width: 100% !important;
+    min-height: 48px !important;
+    box-shadow: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+}
+
+.css-1d391kg .stDownloadButton > button:hover,
+.css-17eq0hr .stDownloadButton > button:hover,
+section[data-testid="stSidebar"] .stDownloadButton > button:hover {
+    background-color: white !important;
+    color: #003660 !important;
+    border-color: white !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3) !important;
 }
