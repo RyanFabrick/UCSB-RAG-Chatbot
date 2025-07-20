@@ -177,112 +177,96 @@ section[data-testid="stSidebar"] h4 {
     font-weight: 500 !important;
 }
 
-/* Sidebar expander styling for better contrast */
+/* UPDATED: Sidebar expander styling to match status messages */
+/* Expander header styling - match st.success appearance */
 .css-1d391kg .streamlit-expanderHeader,
 .css-17eq0hr .streamlit-expanderHeader,
-section[data-testid="stSidebar"] .streamlit-expanderHeader {
-    background-color: rgba(254, 188, 17, 0.9) !important;  /* Gold background */
-    color: #003660 !important;  /* Navy text */
-    border: 1px solid #FEBC11 !important;
-    border-radius: 8px !important;
+section[data-testid="stSidebar"] .streamlit-expanderHeader,
+section[data-testid="stSidebar"] div[data-testid="stExpander"] summary {
+    background-color: rgba(212, 237, 218, 0.98) !important;  /* Same as st.success */
+    color: #155724 !important;  /* Same as st.success */
+    border: 2px solid #28a745 !important;  /* Same as st.success */
+    border-radius: 10px !important;
     font-weight: 600 !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    margin: 0.5rem 0 !important;
+    padding: 0.75rem 1rem !important;
 }
 
-/* Sidebar expander content */
+/* Expander header hover effect */
+.css-1d391kg .streamlit-expanderHeader:hover,
+.css-17eq0hr .streamlit-expanderHeader:hover,
+section[data-testid="stSidebar"] .streamlit-expanderHeader:hover,
+section[data-testid="stSidebar"] div[data-testid="stExpander"] summary:hover {
+    background-color: rgba(212, 237, 218, 1) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Expander content styling */
 .css-1d391kg .streamlit-expanderContent,
 .css-17eq0hr .streamlit-expanderContent,
-section[data-testid="stSidebar"] .streamlit-expanderContent {
+section[data-testid="stSidebar"] .streamlit-expanderContent,
+section[data-testid="stSidebar"] div[data-testid="stExpander"] div[role="region"] {
     background-color: rgba(0, 54, 96, 0.95) !important;
+    color: white !important;
+    border: 2px solid #28a745 !important;
+    border-top: none !important;
+    border-radius: 0 0 10px 10px !important;
+    padding: 1rem !important;
+    margin-top: -2px !important;
+}
+
+/* Ensure expander content text is white */
+.css-1d391kg .streamlit-expanderContent *,
+.css-17eq0hr .streamlit-expanderContent *,
+section[data-testid="stSidebar"] .streamlit-expanderContent *,
+section[data-testid="stSidebar"] div[data-testid="stExpander"] div[role="region"] * {
     color: white !important;
 }
 
-/* Alert messages in sidebar - consistent gold styling */
+/* Alert messages in sidebar - consistent with main area styling */
 .css-1d391kg .stAlert, .css-17eq0hr .stAlert,
-section[data-testid="stSidebar"] .stAlert,
+section[data-testid="stSidebar"] .stAlert {
+    background-color: rgba(212, 237, 218, 0.98) !important;
+    color: #155724 !important;
+    border: 2px solid #28a745 !important;
+    font-weight: 600 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    margin: 0.5rem 0 !important;
+}
+
 .css-1d391kg .stSuccess, .css-17eq0hr .stSuccess,
-section[data-testid="stSidebar"] .stSuccess,
+section[data-testid="stSidebar"] .stSuccess {
+    background-color: rgba(212, 237, 218, 0.98) !important;
+    color: #155724 !important;
+    border: 2px solid #28a745 !important;
+    font-weight: 600 !important;
+}
+
 .css-1d391kg .stError, .css-17eq0hr .stError,
-section[data-testid="stSidebar"] .stError,
+section[data-testid="stSidebar"] .stError {
+    background-color: rgba(248, 215, 218, 0.98) !important;
+    color: #721c24 !important;
+    border: 2px solid #dc3545 !important;
+    font-weight: 600 !important;
+}
+
 .css-1d391kg .stWarning, .css-17eq0hr .stWarning,
-section[data-testid="stSidebar"] .stWarning,
+section[data-testid="stSidebar"] .stWarning {
+    background-color: rgba(255, 243, 205, 0.98) !important;
+    color: #856404 !important;
+    border: 2px solid #ffc107 !important;
+    font-weight: 600 !important;
+}
+
 .css-1d391kg .stInfo, .css-17eq0hr .stInfo,
 section[data-testid="stSidebar"] .stInfo {
-    background-color: rgba(254, 188, 17, 0.9) !important;
+    background-color: rgba(179, 205, 224, 0.98) !important;
     color: #003660 !important;
-    border: 2px solid #FEBC11 !important;
+    border: 2px solid #003660 !important;
     font-weight: 600 !important;
-}
-
-/* CUSTOM SIDEBAR SECTIONS STYLING - Match status message appearance */
-/* About Section */
-.sidebar-about, 
-.css-1d391kg .sidebar-about, .css-17eq0hr .sidebar-about,
-section[data-testid="stSidebar"] .sidebar-about {
-    background-color: rgba(254, 188, 17, 0.9) !important;
-    color: #003660 !important;
-    border: 2px solid #FEBC11 !important;
-    border-radius: 10px !important;
-    padding: 1rem !important;
-    margin: 0.5rem 0 !important;
-    font-weight: 600 !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-}
-
-/* Chat Controls Section */
-.sidebar-chat-controls,
-.css-1d391kg .sidebar-chat-controls, .css-17eq0hr .sidebar-chat-controls,
-section[data-testid="stSidebar"] .sidebar-chat-controls {
-    background-color: rgba(254, 188, 17, 0.9) !important;
-    color: #003660 !important;
-    border: 2px solid #FEBC11 !important;
-    border-radius: 10px !important;
-    padding: 1rem !important;
-    margin: 0.5rem 0 !important;
-    font-weight: 600 !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-}
-
-/* Sample Questions Section */
-.sidebar-sample-questions,
-.css-1d391kg .sidebar-sample-questions, .css-17eq0hr .sidebar-sample-questions,
-section[data-testid="stSidebar"] .sidebar-sample-questions {
-    background-color: rgba(254, 188, 17, 0.9) !important;
-    color: #003660 !important;
-    border: 2px solid #FEBC11 !important;
-    border-radius: 10px !important;
-    padding: 1rem !important;
-    margin: 0.5rem 0 !important;
-    font-weight: 600 !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-}
-
-/* Ensure text within these sections maintains proper styling */
-.sidebar-about *, .sidebar-chat-controls *, .sidebar-sample-questions *,
-.css-1d391kg .sidebar-about *, .css-17eq0hr .sidebar-about *,
-.css-1d391kg .sidebar-chat-controls *, .css-17eq0hr .sidebar-chat-controls *,
-.css-1d391kg .sidebar-sample-questions *, .css-17eq0hr .sidebar-sample-questions *,
-section[data-testid="stSidebar"] .sidebar-about *,
-section[data-testid="stSidebar"] .sidebar-chat-controls *,
-section[data-testid="stSidebar"] .sidebar-sample-questions * {
-    color: #003660 !important;
-    font-weight: 600 !important;
-}
-
-/* Headers within these sections should remain navy but bold */
-.sidebar-about h1, .sidebar-about h2, .sidebar-about h3, .sidebar-about h4,
-.sidebar-chat-controls h1, .sidebar-chat-controls h2, .sidebar-chat-controls h3, .sidebar-chat-controls h4,
-.sidebar-sample-questions h1, .sidebar-sample-questions h2, .sidebar-sample-questions h3, .sidebar-sample-questions h4,
-.css-1d391kg .sidebar-about h1, .css-1d391kg .sidebar-about h2, .css-1d391kg .sidebar-about h3, .css-1d391kg .sidebar-about h4,
-.css-17eq0hr .sidebar-about h1, .css-17eq0hr .sidebar-about h2, .css-17eq0hr .sidebar-about h3, .css-17eq0hr .sidebar-about h4,
-.css-1d391kg .sidebar-chat-controls h1, .css-1d391kg .sidebar-chat-controls h2, .css-1d391kg .sidebar-chat-controls h3, .css-1d391kg .sidebar-chat-controls h4,
-.css-17eq0hr .sidebar-chat-controls h1, .css-17eq0hr .sidebar-chat-controls h2, .css-17eq0hr .sidebar-chat-controls h3, .css-17eq0hr .sidebar-chat-controls h4,
-.css-1d391kg .sidebar-sample-questions h1, .css-1d391kg .sidebar-sample-questions h2, .css-1d391kg .sidebar-sample-questions h3, .css-1d391kg .sidebar-sample-questions h4,
-.css-17eq0hr .sidebar-sample-questions h1, .css-17eq0hr .sidebar-sample-questions h2, .css-17eq0hr .sidebar-sample-questions h3, .css-17eq0hr .sidebar-sample-questions h4,
-section[data-testid="stSidebar"] .sidebar-about h1, section[data-testid="stSidebar"] .sidebar-about h2, section[data-testid="stSidebar"] .sidebar-about h3, section[data-testid="stSidebar"] .sidebar-about h4,
-section[data-testid="stSidebar"] .sidebar-chat-controls h1, section[data-testid="stSidebar"] .sidebar-chat-controls h2, section[data-testid="stSidebar"] .sidebar-chat-controls h3, section[data-testid="stSidebar"] .sidebar-chat-controls h4,
-section[data-testid="stSidebar"] .sidebar-sample-questions h1, section[data-testid="stSidebar"] .sidebar-sample-questions h2, section[data-testid="stSidebar"] .sidebar-sample-questions h3, section[data-testid="stSidebar"] .sidebar-sample-questions h4 {
-    color: #003660 !important;
-    font-weight: bold !important;
 }
 
 /* Button styling adjustments */
@@ -303,44 +287,24 @@ section[data-testid="stSidebar"] .sidebar-sample-questions h1, section[data-test
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Sidebar button styling */
-.css-1d391kg .stButton > button, .css-17eq0hr .stButton > button {
+/* Sidebar button styling - keep existing behavior */
+.css-1d391kg .stButton > button, .css-17eq0hr .stButton > button,
+section[data-testid="stSidebar"] .stButton > button {
     background-color: #FEBC11 !important;
     color: #003660 !important;
     border: 2px solid #FEBC11 !important;
     font-weight: 600 !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
 }
 
-.css-1d391kg .stButton > button:hover, .css-17eq0hr .stButton > button:hover {
+.css-1d391kg .stButton > button:hover, .css-17eq0hr .stButton > button:hover,
+section[data-testid="stSidebar"] .stButton > button:hover {
     background-color: white !important;
     color: #003660 !important;
     border-color: white !important;
-}
-
-/* Buttons within custom sidebar sections */
-.sidebar-about .stButton > button, .sidebar-chat-controls .stButton > button, .sidebar-sample-questions .stButton > button,
-.css-1d391kg .sidebar-about .stButton > button, .css-17eq0hr .sidebar-about .stButton > button,
-.css-1d391kg .sidebar-chat-controls .stButton > button, .css-17eq0hr .sidebar-chat-controls .stButton > button,
-.css-1d391kg .sidebar-sample-questions .stButton > button, .css-17eq0hr .sidebar-sample-questions .stButton > button,
-section[data-testid="stSidebar"] .sidebar-about .stButton > button,
-section[data-testid="stSidebar"] .sidebar-chat-controls .stButton > button,
-section[data-testid="stSidebar"] .sidebar-sample-questions .stButton > button {
-    background-color: #003660 !important;
-    color: #FEBC11 !important;
-    border: 2px solid #003660 !important;
-    font-weight: 600 !important;
-}
-
-.sidebar-about .stButton > button:hover, .sidebar-chat-controls .stButton > button:hover, .sidebar-sample-questions .stButton > button:hover,
-.css-1d391kg .sidebar-about .stButton > button:hover, .css-17eq0hr .sidebar-about .stButton > button:hover,
-.css-1d391kg .sidebar-chat-controls .stButton > button:hover, .css-17eq0hr .sidebar-chat-controls .stButton > button:hover,
-.css-1d391kg .sidebar-sample-questions .stButton > button:hover, .css-17eq0hr .sidebar-sample-questions .stButton > button:hover,
-section[data-testid="stSidebar"] .sidebar-about .stButton > button:hover,
-section[data-testid="stSidebar"] .sidebar-chat-controls .stButton > button:hover,
-section[data-testid="stSidebar"] .sidebar-sample-questions .stButton > button:hover {
-    background-color: white !important;
-    color: #003660 !important;
-    border-color: white !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3) !important;
 }
 
 /* Metric styling */
@@ -361,13 +325,13 @@ section[data-testid="stSidebar"] .sidebar-sample-questions .stButton > button:ho
     font-weight: bold !important;
 }
 
-/* Override any remaining dark text in sidebar */
+/* Override any remaining dark text in sidebar - but preserve expander headers */
 .css-1d391kg *, .css-17eq0hr *,
 section[data-testid="stSidebar"] * {
     color: white !important;
 }
 
-/* But keep headers gold */
+/* But keep section headers gold */
 .css-1d391kg h1, .css-1d391kg h2, .css-1d391kg h3, .css-1d391kg h4,
 .css-17eq0hr h1, .css-17eq0hr h2, .css-17eq0hr h3, .css-17eq0hr h4,
 section[data-testid="stSidebar"] h1,
@@ -378,10 +342,13 @@ section[data-testid="stSidebar"] h4 {
     font-weight: bold !important;
 }
 
-/* And button text should be navy on gold buttons */
-.css-1d391kg .stButton > button, .css-17eq0hr .stButton > button,
-section[data-testid="stSidebar"] .stButton > button {
-    color: #003660 !important;
+/* Exception: Expander headers should use the success message colors */
+.css-1d391kg .streamlit-expanderHeader *,
+.css-17eq0hr .streamlit-expanderHeader *,
+section[data-testid="stSidebar"] .streamlit-expanderHeader *,
+section[data-testid="stSidebar"] div[data-testid="stExpander"] summary * {
+    color: #155724 !important;  /* Success message color */
+    font-weight: 600 !important;
 }
 
 /* Caption text */
