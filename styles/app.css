@@ -374,6 +374,22 @@ section[data-testid="stSidebar"] button {
     box-sizing: border-box !important;  /* ENSURE PROPER SIZING */
 }
 
+/* NUCLEAR OPTION - Add if the above doesn't work */
+section[data-testid="stSidebar"] div[data-testid="stVerticalBlock"] div[data-testid="stVerticalBlock"] div.stButton {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+section[data-testid="stSidebar"] div[data-testid="stVerticalBlock"] div[data-testid="stVerticalBlock"] div.stButton button {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 100% !important;
+    margin: 0.25rem 0 !important;
+    padding: 0.75rem 1rem !important;
+}
 /* Universal sidebar button hover styling */
 .css-1d391kg .stButton > button:hover,
 .css-17eq0hr .stButton > button:hover,
@@ -459,4 +475,29 @@ section[data-testid="stSidebar"] .stDownloadButton > button:hover {
     border-color: white !important;
     transform: translateY(-1px) !important;
     box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* ===== FIX FOR SAMPLE QUESTION BUTTONS ===== */
+/* Targets the container holding all sample question buttons */
+section[data-testid="stSidebar"] div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column"] {
+    gap: 0.5rem !important; /* Consistent spacing between buttons */
+}
+
+/* Forces each button to stretch full width */
+section[data-testid="stSidebar"] div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column"] > div.stButton {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Styles the actual <button> element */
+section[data-testid="stSidebar"] div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column"] > div.stButton > button {
+    width: 100% !important;
+    min-width: 100% !important;
+    flex-grow: 1 !important;
+    margin: 0 !important;
+    padding: 0.75rem 1rem !important;
+    text-align: center !important;
 }

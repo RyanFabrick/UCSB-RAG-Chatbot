@@ -305,25 +305,26 @@ def display_sidebar():
         
         # Sample questions section - NOW WRAPPED IN EXPANDER
         with st.expander("Sample Questions"):
-            sample_questions = [
-                "What CS courses are available?",
-                "Tell me about the ME program",
-                "Prerequisites for ECE 10A?",
-                "Computer Engineering requirements",
-                "Materials department courses"
-            ]
-            
-            # Create buttons for each sample question
-            for question in sample_questions:
-                # st.button() creates clickable button
-                # key parameter for unique identifier per button
-                # hash() creates unique key from question text
-                # help parameter shows tooltip on hover
-                if st.button(question, key=f"sample_{hash(question)}", help="Click to ask this question"):
-                    # Add question to chat history when clicked
-                    st.session_state.messages.append({"role": "user", "content": question})
-                    # st.rerun() triggers app to rerun and show the new message
-                    st.rerun()
+            # Use st.columns() to force consistent layout
+            col1 = st.columns(1)[0]  # Single full-width column
+            with col1:
+                sample_questions = [
+                    "What CS courses are available?",
+                    "Tell me about the ME program",
+                    "Prerequisites for ECE 10A?",
+                    "Computer Engineering requirements",
+                    "Materials department courses"
+                ]
+                
+                for question in sample_questions:
+                    if st.button(
+                        question,
+                        use_container_width=True,  # Forces full-width like Chat Controls
+                        key=f"sample_{hash(question)}",
+                        help="Click to ask this question",
+                    ):
+                        st.session_state.messages.append({"role": "user", "content": question})
+                        st.rerun()
         
         st.markdown("---")
         
