@@ -1,45 +1,35 @@
 /* Main app background styling with UCSB gold */
 .stApp {
-    background-color: #FEBC11 !important;  /* UCSB official gold */
+    background-color: #FEBC11 !important;
 }
 
 /* Sidebar styling with UCSB blue */
-.css-1d391kg, .css-17eq0hr {
-    background-color: #003660 !important;  /* UCSB official navy blue */
-}
-
-/* Alternative sidebar selectors (Streamlit versions may vary) */
 section[data-testid="stSidebar"] {
-    background-color: #003660 !important;  /* UCSB official navy blue */
-    color: white !important;  /* White text for contrast */
+    background-color: #003660 !important;
+    color: white !important;
 }
 
-/* Sidebar text styling - comprehensive coverage */
-.css-1d391kg .stMarkdown, .css-17eq0hr .stMarkdown,
-.css-1d391kg .stMarkdown p, .css-17eq0hr .stMarkdown p,
-.css-1d391kg .stText, .css-17eq0hr .stText,
-.css-1d391kg div, .css-17eq0hr div,
+/* Sidebar text styling */
 section[data-testid="stSidebar"] .stMarkdown,
 section[data-testid="stSidebar"] .stMarkdown p,
 section[data-testid="stSidebar"] .stText,
 section[data-testid="stSidebar"] div,
 section[data-testid="stSidebar"] span,
-section[data-testid="stSidebar"] li {
+section[data-testid="stSidebar"] li,
+section[data-testid="stSidebar"] * {
     color: white !important;
 }
 
-/* Sidebar headers */
-.css-1d391kg h1, .css-1d391kg h2, .css-1d391kg h3, .css-1d391kg h4,
-.css-17eq0hr h1, .css-17eq0hr h2, .css-17eq0hr h3, .css-17eq0hr h4,
+/* Sidebar headers - gold color */
 section[data-testid="stSidebar"] h1,
 section[data-testid="stSidebar"] h2,
 section[data-testid="stSidebar"] h3,
 section[data-testid="stSidebar"] h4 {
-    color: #FEBC11 !important;  /* Gold headers in sidebar */
+    color: #FEBC11 !important;
     font-weight: bold !important;
 }
 
-/* Main content area styling for better readability */
+/* Main content area styling */
 .main .block-container {
     background-color: rgba(255, 255, 255, 0.95) !important;
     border-radius: 15px;
@@ -48,9 +38,10 @@ section[data-testid="stSidebar"] h4 {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Headers */
 .main-header {
     font-size: 2.5rem;
-    color: #003660;             /* UCSB navy blue */
+    color: #003660;
     text-align: center;
     margin-bottom: 1rem;
     font-weight: bold;
@@ -59,13 +50,13 @@ section[data-testid="stSidebar"] h4 {
 
 .sub-header {
     font-size: 1.2rem;
-    color: #003660;             /* UCSB navy blue for better contrast */
+    color: #003660;
     text-align: center;
     margin-bottom: 2rem;
     font-weight: 500;
 }
 
-/* Status message styling for better visibility */
+/* Alert messages */
 .stAlert {
     background-color: rgba(255, 255, 255, 0.95) !important;
     border-radius: 10px !important;
@@ -73,7 +64,6 @@ section[data-testid="stSidebar"] h4 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Success messages (green) with better visibility */
 .stSuccess {
     background-color: rgba(212, 237, 218, 0.98) !important;
     color: #155724 !important;
@@ -81,7 +71,6 @@ section[data-testid="stSidebar"] h4 {
     font-weight: 600 !important;
 }
 
-/* Info messages with UCSB blue theme */
 .stInfo {
     background-color: rgba(179, 205, 224, 0.98) !important;
     color: #003660 !important;
@@ -89,7 +78,6 @@ section[data-testid="stSidebar"] h4 {
     font-weight: 600 !important;
 }
 
-/* Error messages */
 .stError {
     background-color: rgba(248, 215, 218, 0.98) !important;
     color: #721c24 !important;
@@ -97,7 +85,6 @@ section[data-testid="stSidebar"] h4 {
     font-weight: 600 !important;
 }
 
-/* Warning messages */
 .stWarning {
     background-color: rgba(255, 243, 205, 0.98) !important;
     color: #856404 !important;
@@ -105,37 +92,18 @@ section[data-testid="stSidebar"] h4 {
     font-weight: 600 !important;
 }
 
-.chat-message {
-    padding: 1rem;
-    border-radius: 10px;
-    margin: 1rem 0;
-    border-left: 4px solid #003660;
-    background-color: rgba(255, 255, 255, 0.95);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.user-message {
-    background-color: rgba(254, 188, 17, 0.15);  /* Light UCSB gold tint */
-    border-left-color: #003660;
-    border: 1px solid rgba(0, 54, 96, 0.2);
-}
-
-.bot-message {
-    background-color: rgba(0, 54, 96, 0.08);  /* Light UCSB blue tint */
-    border-left-color: #FEBC11;
-    border: 1px solid rgba(254, 188, 17, 0.3);
-}
-
+/* Source item styling */
 .source-item {
     background-color: rgba(255, 255, 255, 0.95);
     padding: 0.75rem;
     margin: 0.3rem 0;
     border-radius: 8px;
-    border-left: 4px solid #FEBC11;  /* UCSB gold accent */
+    border-left: 4px solid #FEBC11;
     border: 1px solid rgba(0, 54, 96, 0.2);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+/* Error and success message styling */
 .error-message {
     background-color: rgba(248, 215, 218, 0.98);
     color: #721c24;
@@ -156,16 +124,7 @@ section[data-testid="stSidebar"] h4 {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.metrics-container {
-    background-color: rgba(255, 255, 255, 0.95);
-    padding: 1.5rem;
-    border-radius: 10px;
-    margin: 1rem 0;
-    border: 2px solid #003660;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Chat input styling for better visibility on gold background */
+/* Chat input styling */
 .stChatInput > div {
     background-color: rgba(255, 255, 255, 0.98) !important;
     border: 2px solid #003660 !important;
@@ -177,9 +136,7 @@ section[data-testid="stSidebar"] h4 {
     font-weight: 500 !important;
 }
 
-/* About expander styling */
-.css-1d391kg .streamlit-expanderHeader,
-.css-17eq0hr .streamlit-expanderHeader,
+/* Expander styling */
 section[data-testid="stSidebar"] .streamlit-expanderHeader,
 section[data-testid="stSidebar"] div[data-testid="stExpander"] summary {
     background-color: #FEBC11 !important;
@@ -188,15 +145,11 @@ section[data-testid="stSidebar"] div[data-testid="stExpander"] summary {
     border-radius: 8px !important;
     font-weight: 600 !important;
     transition: all 0.3s ease !important;
-    box-shadow: none !important;
     margin: 0.5rem 0 !important;
     padding: 0.75rem 1rem !important;
-    text-align: center !important;  /* CENTER TEXT IN ABOUT EXPANDER */
+    text-align: center !important;
 }
 
-/* About expander header hover effect - match button hover */
-.css-1d391kg .streamlit-expanderHeader:hover,
-.css-17eq0hr .streamlit-expanderHeader:hover,
 section[data-testid="stSidebar"] .streamlit-expanderHeader:hover,
 section[data-testid="stSidebar"] div[data-testid="stExpander"] summary:hover {
     background-color: white !important;
@@ -207,8 +160,6 @@ section[data-testid="stSidebar"] div[data-testid="stExpander"] summary:hover {
 }
 
 /* Expander content styling */
-.css-1d391kg .streamlit-expanderContent,
-.css-17eq0hr .streamlit-expanderContent,
 section[data-testid="stSidebar"] .streamlit-expanderContent,
 section[data-testid="stSidebar"] div[data-testid="stExpander"] div[role="region"] {
     background-color: rgba(0, 54, 96, 0.95) !important;
@@ -218,60 +169,65 @@ section[data-testid="stSidebar"] div[data-testid="stExpander"] div[role="region"
     border-radius: 0 0 8px 8px !important;
     padding: 1rem !important;
     margin-top: -2px !important;
-    text-align: center !important;  /* CENTER TEXT IN ABOUT EXPANDER CONTENT */
+    text-align: center !important;
 }
 
-/* Ensure expander content text is white and centered */
-.css-1d391kg .streamlit-expanderContent *,
-.css-17eq0hr .streamlit-expanderContent *,
 section[data-testid="stSidebar"] .streamlit-expanderContent *,
 section[data-testid="stSidebar"] div[data-testid="stExpander"] div[role="region"] * {
     color: white !important;
-    text-align: center !important;  /* CENTER ALL TEXT IN ABOUT EXPANDER */
+    text-align: center !important;
 }
 
-/* Alert messages in sidebar - consistent with main area styling */
-.css-1d391kg .stAlert, .css-17eq0hr .stAlert,
-section[data-testid="stSidebar"] .stAlert {
-    background-color: rgba(212, 237, 218, 0.98) !important;
-    color: #155724 !important;
-    border: 2px solid #28a745 !important;
-    font-weight: 600 !important;
-    border-radius: 10px !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-    margin: 0.5rem 0 !important;
-}
-
-.css-1d391kg .stSuccess, .css-17eq0hr .stSuccess,
-section[data-testid="stSidebar"] .stSuccess {
-    background-color: rgba(212, 237, 218, 0.98) !important;
-    color: #155724 !important;
-    border: 2px solid #28a745 !important;
-    font-weight: 600 !important;
-}
-
-.css-1d391kg .stError, .css-17eq0hr .stError,
-section[data-testid="stSidebar"] .stError {
-    background-color: rgba(248, 215, 218, 0.98) !important;
-    color: #721c24 !important;
-    border: 2px solid #dc3545 !important;
-    font-weight: 600 !important;
-}
-
-.css-1d391kg .stWarning, .css-17eq0hr .stWarning,
-section[data-testid="stSidebar"] .stWarning {
-    background-color: rgba(255, 243, 205, 0.98) !important;
-    color: #856404 !important;
-    border: 2px solid #ffc107 !important;
-    font-weight: 600 !important;
-}
-
-.css-1d391kg .stInfo, .css-17eq0hr .stInfo,
-section[data-testid="stSidebar"] .stInfo {
-    background-color: rgba(179, 205, 224, 0.98) !important;
+/* Universal sidebar button styling */
+section[data-testid="stSidebar"] .stButton > button,
+section[data-testid="stSidebar"] button {
+    background-color: #FEBC11 !important;
     color: #003660 !important;
-    border: 2px solid #003660 !important;
+    border: 2px solid #FEBC11 !important;
     font-weight: 600 !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+    margin: 0.25rem 0 !important;
+    padding: 0.75rem 1rem !important;
+    width: 100% !important;
+    min-height: 48px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+}
+
+section[data-testid="stSidebar"] .stButton > button:hover,
+section[data-testid="stSidebar"] button:hover {
+    background-color: white !important;
+    color: #003660 !important;
+    border-color: white !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Download button styling */
+section[data-testid="stSidebar"] .stDownloadButton > button {
+    background-color: #FEBC11 !important;
+    color: #003660 !important;
+    border: 2px solid #FEBC11 !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+    margin: 0.25rem 0 !important;
+    padding: 0.75rem 1rem !important;
+    width: 100% !important;
+    min-height: 48px !important;
+    text-align: center !important;
+}
+
+section[data-testid="stSidebar"] .stDownloadButton > button:hover {
+    background-color: white !important;
+    color: #003660 !important;
+    border-color: white !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3) !important;
 }
 
 /* Main content button styling */
@@ -308,196 +264,4 @@ section[data-testid="stSidebar"] .stInfo {
 .stMetric div[data-testid="metric-container"] > div {
     color: #003660 !important;
     font-weight: bold !important;
-}
-
-/* Override any remaining dark text in sidebar - but preserve expander headers */
-.css-1d391kg *, .css-17eq0hr *,
-section[data-testid="stSidebar"] * {
-    color: white !important;
-}
-
-/* But keep section headers gold */
-.css-1d391kg h1, .css-1d391kg h2, .css-1d391kg h3, .css-1d391kg h4,
-.css-17eq0hr h1, .css-17eq0hr h2, .css-17eq0hr h3, .css-17eq0hr h4,
-section[data-testid="stSidebar"] h1,
-section[data-testid="stSidebar"] h2,
-section[data-testid="stSidebar"] h3,
-section[data-testid="stSidebar"] h4 {
-    color: #FEBC11 !important;  /* Gold headers in sidebar */
-    font-weight: bold !important;
-}
-
-/* Exception: Expander headers should use the button colors (gold background, navy text) */
-.css-1d391kg .streamlit-expanderHeader *,
-.css-17eq0hr .streamlit-expanderHeader *,
-section[data-testid="stSidebar"] .streamlit-expanderHeader *,
-section[data-testid="stSidebar"] div[data-testid="stExpander"] summary * {
-    color: #003660 !important;  /* Navy text like buttons */
-    font-weight: 600 !important;
-    text-align: center !important;  /* CENTER EXPANDER HEADER TEXT */
-}
-
-/* Caption text */
-.stCaption {
-    color: #666 !important;
-    font-weight: 500 !important;
-}
-
-/* UNIVERSAL SIDEBAR BUTTON STYLING - All buttons get consistent sizing and styling */
-
-/* Universal sidebar button styling - catches ALL buttons in sidebar */
-.css-1d391kg .stButton > button, 
-.css-17eq0hr .stButton > button,
-section[data-testid="stSidebar"] .stButton > button,
-.css-1d391kg [data-baseweb="button"],
-.css-17eq0hr [data-baseweb="button"],
-section[data-testid="stSidebar"] [data-baseweb="button"],
-/* Additional catch-all selectors */
-.css-1d391kg button,
-.css-17eq0hr button,
-section[data-testid="stSidebar"] button {
-    background-color: #FEBC11 !important;  /* Gold background */
-    color: #003660 !important;  /* Navy text */
-    border: 2px solid #FEBC11 !important;  /* Gold border */
-    font-weight: 600 !important;  /* Bold text */
-    border-radius: 8px !important;  
-    transition: all 0.3s ease !important;  
-    margin: 0.25rem 0 !important;  /* REDUCED MARGIN FOR TIGHTER SPACING */
-    padding: 0.75rem 1rem !important;  /* CONSISTENT PADDING */
-    width: 100% !important;  /* FULL WIDTH FOR ALL BUTTONS */
-    min-height: 48px !important;  /* CONSISTENT MINIMUM HEIGHT */
-    box-shadow: none !important;
-    display: flex !important;  /* FLEX DISPLAY FOR PROPER ALIGNMENT */
-    align-items: center !important;  /* CENTER CONTENT VERTICALLY */
-    justify-content: center !important;  /* CENTER CONTENT HORIZONTALLY */
-    text-align: center !important;  /* CENTER TEXT */
-    box-sizing: border-box !important;  /* ENSURE PROPER SIZING */
-}
-
-/* NUCLEAR OPTION - Add if the above doesn't work */
-section[data-testid="stSidebar"] div[data-testid="stVerticalBlock"] div[data-testid="stVerticalBlock"] div.stButton {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-    padding: 0 !important;
-    margin: 0 !important;
-}
-
-section[data-testid="stSidebar"] div[data-testid="stVerticalBlock"] div[data-testid="stVerticalBlock"] div.stButton button {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 100% !important;
-    margin: 0.25rem 0 !important;
-    padding: 0.75rem 1rem !important;
-}
-/* Universal sidebar button hover styling */
-.css-1d391kg .stButton > button:hover,
-.css-17eq0hr .stButton > button:hover,
-section[data-testid="stSidebar"] .stButton > button:hover,
-.css-1d391kg [data-baseweb="button"]:hover,
-.css-17eq0hr [data-baseweb="button"]:hover,
-section[data-testid="stSidebar"] [data-baseweb="button"]:hover,
-/* Additional catch-all selectors */
-.css-1d391kg button:hover,
-.css-17eq0hr button:hover,
-section[data-testid="stSidebar"] button:hover {
-    background-color: white !important;  /* White background on hover */
-    color: #003660 !important;  /* Navy text stays same */
-    border-color: white !important;  /* White border on hover */
-    transform: translateY(-1px) !important;  /* Lift effect */
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3) !important;  /* White shadow */
-}
-
-/* SPECIFIC STYLING FOR SAMPLE QUESTION BUTTONS - Ensure they match other buttons */
-.css-1d391kg .stButton > button[key*="sample"],
-.css-17eq0hr .stButton > button[key*="sample"],
-section[data-testid="stSidebar"] .stButton > button[key*="sample"] {
-    background-color: #FEBC11 !important;
-    color: #003660 !important;
-    border: 2px solid #FEBC11 !important;
-    font-weight: 600 !important;
-    border-radius: 8px !important;
-    transition: all 0.3s ease !important;
-    margin: 0.25rem 0 !important;
-    padding: 0.75rem 1rem !important;
-    width: 100% !important;
-    min-height: 48px !important;
-    box-shadow: none !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
-    box-sizing: border-box !important;
-}
-
-/* Ensure button text is styled correctly */
-.css-1d391kg button *,
-.css-17eq0hr button *,
-section[data-testid="stSidebar"] button *,
-.css-1d391kg .stButton > button *,
-.css-17eq0hr .stButton > button *,
-section[data-testid="stSidebar"] .stButton > button *,
-.css-1d391kg [data-baseweb="button"] *,
-.css-17eq0hr [data-baseweb="button"] *,
-section[data-testid="stSidebar"] [data-baseweb="button"] * {
-    color: #003660 !important;  /* Navy text */
-    font-weight: 600 !important;
-    text-align: center !important;  /* CENTER BUTTON TEXT */
-}
-
-/* ENSURE DOWNLOAD BUTTON AND OTHER SPECIAL BUTTONS ALSO GET CONSISTENT STYLING */
-.css-1d391kg .stDownloadButton > button,
-.css-17eq0hr .stDownloadButton > button,
-section[data-testid="stSidebar"] .stDownloadButton > button {
-    background-color: #FEBC11 !important;
-    color: #003660 !important;
-    border: 2px solid #FEBC11 !important;
-    font-weight: 600 !important;
-    border-radius: 8px !important;
-    transition: all 0.3s ease !important;
-    margin: 0.25rem 0 !important;
-    padding: 0.75rem 1rem !important;
-    width: 100% !important;
-    min-height: 48px !important;
-    box-shadow: none !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-align: center !important;
-    box-sizing: border-box !important;
-}
-
-.css-1d391kg .stDownloadButton > button:hover,
-.css-17eq0hr .stDownloadButton > button:hover,
-section[data-testid="stSidebar"] .stDownloadButton > button:hover {
-    background-color: white !important;
-    color: #003660 !important;
-    border-color: white !important;
-    transform: translateY(-1px) !important;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3) !important;
-}
-
-/* ===== FIX FOR SAMPLE QUESTION BUTTONS ===== */
-/* Targets the container holding all sample question buttons */
-section[data-testid="stSidebar"] div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column"] {
-    gap: 0.5rem !important; /* Consistent spacing between buttons */
-}
-
-/* Forces each button to stretch full width */
-section[data-testid="stSidebar"] div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column"] > div.stButton {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-/* Styles the actual <button> element */
-section[data-testid="stSidebar"] div[data-testid="stVerticalBlock"] > div[style*="flex-direction: column"] > div.stButton > button {
-    width: 100% !important;
-    min-width: 100% !important;
-    flex-grow: 1 !important;
-    margin: 0 !important;
-    padding: 0.75rem 1rem !important;
-    text-align: center !important;
 }
