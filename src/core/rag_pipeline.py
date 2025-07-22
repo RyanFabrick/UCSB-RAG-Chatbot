@@ -6,9 +6,11 @@ import json
 import time
 from typing import List, Dict, Any
 import google.generativeai as genai  # Google Gemini API for embeddings and chat
-from dotenv import load_dotenv           # Loads env variables from .env file
 import chromadb                         # Vector database for storing embeddings
 from chromadb.config import Settings
+
+from ..config.settings import Config
+from ..config.prompts import get_system_prompt
 
 #ARCHITECTURE:
 # 1. DESIGN PATTERN: Test-driven development with comprehensive validation
@@ -20,9 +22,6 @@ from chromadb.config import Settings
 # 7. REPORTING: Detailed results with JSON export for analysis
 # 8. USER EXPERIENCE: Clear status indicators and actionable error messages
 
-# Load environment variables from .env file
-load_dotenv()
-
 class RAGPipelineTester:
     """
     Tests complete RAG pipeline flow
@@ -31,24 +30,26 @@ class RAGPipelineTester:
     - Generation: Create responses using retrieved context (gemini 1.5 flash free tier)
     """
     
-    def __init__(self, collection_name: str = "ucsb_engineering"):
+    def __init__(self, collection_name: str = None):
         """
         Class constructor with default parameter
         Initialize all components needed for RAG testing
         """
-        # Configure Gemini API using env vars
-        # os.getenv() to safely access environment variables
-        genai.configure(api_key=os.getenv('GOOGLE_API_KEY'))
+        # Use configuration class
+        self.config = Config
         
-        # Sets up model names for different tasks
-        self.embedding_model = "models/embedding-001"  # For converting text to vectors
-        self.chat_model = "gemini-1.5-flash"           # For generating responses
-        self.collection_name = collection_name          # ChromaDB collection name
+        # Configure Gemini API using config
+        genai.configure(api_key=self.config.GOOGLE_API_KEY)
         
-        # Creates ChromaDB client with persistent storage
+        # Sets up model names for different tasks from config
+        self.embedding_model = self.config.EMBEDDING_MODEL  # For converting text to vectors
+        self.chat_model = self.config.GEMINI_MODEL          # For generating responses
+        self.collection_name = collection_name or self.config.COLLECTION_NAME  # ChromaDB collection name
+        
+        # Creates ChromaDB client with persistent storage from config
         # Vector database to store and search document embeddings (chromaDB)
         self.chroma_client = chromadb.PersistentClient(
-            path="./embeddings",  # Local file storage path
+            path=self.config.CHROMADB_PATH,  # From config
             settings=Settings(anonymized_telemetry=False)
         )
         
@@ -65,13 +66,16 @@ class RAGPipelineTester:
         """
         print("Checking RAG Pipeline Prerequisites...")
         
-        # 1. CHECK API KEY
-        # os.getenv() returns None if key doesn't exist
-        # Ensures Google API key is available for embeddings/chat
-        if not os.getenv('GOOGLE_API_KEY'):
-            print("GOOGLE_API_KEY not found in environment variables")
+        # 1. CHECK API KEY using config validation
+        try:
+            is_valid, error_msg = self.config.validate_config()
+            if not is_valid:
+                print(f"Configuration error: {error_msg}")
+                return False
+        except Exception as e:
+            print(f"Configuration validation failed: {e}")
             return False
-        print("Google API key found")
+        print("Configuration and API key validated")
         
         # 2. CHECK CHROMADB COLLECTION
         # try/except block for error handling
@@ -82,7 +86,7 @@ class RAGPipelineTester:
             print(f"ChromaDB collection found with {doc_count} documents")
         except Exception as e:
             print(f"ChromaDB collection not found: {e}")
-            print("   Run: python scripts/embeddings.py")  # Helpful error message
+            print("   Run: python -m src.core.embeddings")  # Updated help message
             return False
         
         # 3. TEST API CONNECTION
@@ -109,7 +113,7 @@ class RAGPipelineTester:
         print("\nTesting Embedding Quality...")
         
         # List of dicts with test cases
-        # FDefine pairs of queries to test similarity expectations
+        # Define pairs of queries to test similarity expectations
         test_cases = [
             {
                 "query1": "computer science courses",
@@ -177,7 +181,7 @@ class RAGPipelineTester:
                 # Prints test result with formatting
                 print(f"{status} {case['query1']} vs {case['query2']}: {similarity:.3f}")
                 
-                # Rate limiting to avoid API throttling hopefully
+                # Rate limiting to avoid API throttling
                 time.sleep(1)
                 
             except Exception as e:
@@ -224,7 +228,7 @@ class RAGPipelineTester:
         results = []
         for case in test_cases:
             try:
-                # Cnverts query to embedding for vector search
+                # Converts query to embedding for vector search
                 query_emb = genai.embed_content(
                     model=self.embedding_model,
                     content=case["query"],
@@ -232,10 +236,10 @@ class RAGPipelineTester:
                 )['embedding']
                 
                 # Searches vector database for similar documents
-                # ChromaDB query with embedding and result count
+                # ChromaDB query with embedding and result count from config
                 search_results = collection.query(
                     query_embeddings=[query_emb],  # List of embeddings to search
-                    n_results=3                    # Return top 3 matches
+                    n_results=self.config.MAX_CONTEXT_DOCS  # From config
                 )
                 
                 # Checks if top result matches expectations
@@ -265,14 +269,14 @@ class RAGPipelineTester:
                     
                     print(f"{status} {case['query']}: got {top_result.get('type')} from {top_result.get('department')}")
                 else:
-                    print(f"{case['query']}: No results found")
+                    print(f"❌ {case['query']}: No results found")
                     results.append({
                         "query": case["query"],
                         "error": "No results found",
                         "passed": False
                     })
                 
-                time.sleep(1)  # Rate limiting hopefully lol
+                time.sleep(1)  # Rate limiting
                 
             except Exception as e:
                 print(f"❌ Error testing retrieval: {e}")
@@ -313,15 +317,18 @@ class RAGPipelineTester:
                 
                 search_results = collection.query(
                     query_embeddings=[query_emb],
-                    n_results=3
+                    n_results=self.config.MAX_CONTEXT_DOCS  # From config
                 )
                 
                 # Formats retrieved documents for LLM
                 context = self._format_context_for_llm(search_results)
                 
+                # Use system prompt from config
+                system_prompt = get_system_prompt()
+                
                 # fstring for prompt formatting
                 # Creates structured prompt with context and question
-                prompt = f"""You are a UCSB College of Engineering assistant. Answer the question based on the context provided.
+                prompt = f"""{system_prompt}
 
 CONTEXT:
 {context}
@@ -369,9 +376,16 @@ Please provide a helpful answer based on the context above."""
         """
         print("\nTesting End-to-End Pipeline...")
         
-        # Imports statement inside method (dynamic import)
-        # Uses the actual response generator module
-        from responseGenerator import GeminiResponseGenerator
+        # Import from refactored response generator
+        try:
+            from .response_generator import GeminiResponseGenerator
+        except ImportError:
+            # Fallback for direct execution
+            try:
+                from src.core.response_generator import GeminiResponseGenerator
+            except ImportError:
+                print("Could not import GeminiResponseGenerator")
+                return {"test_type": "end_to_end", "results": [], "error": "Import failed"}
         
         try:
             generator = GeminiResponseGenerator()
@@ -493,6 +507,24 @@ Please provide a helpful answer based on the context above."""
         
         return score
     
+    def get_test_stats(self) -> Dict[str, Any]:
+        """Get statistics about the test environment"""
+        try:
+            collection = self.chroma_client.get_collection(name=self.collection_name)
+            return {
+                "collection_name": self.collection_name,
+                "document_count": collection.count(),
+                "embedding_model": self.embedding_model,
+                "chat_model": self.chat_model,
+                "config_valid": True
+            }
+        except Exception as e:
+            return {
+                "collection_name": self.collection_name,
+                "error": str(e),
+                "config_valid": False
+            }
+    
     def run_all_tests(self) -> Dict[str, Any]:
         """
         Execute complete test suite and generate summary
@@ -502,11 +534,11 @@ Please provide a helpful answer based on the context above."""
         print("UCSB RAG PIPELINE COMPREHENSIVE TEST")
         print("="*60)
         
-        # Checsk prerequisites before running tests
+        # Check prerequisites before running tests
         if not self.check_prerequisites():
             return {"status": "failed", "error": "Prerequisites not met"}
         
-        # Runs all test methods and collect results
+        # Run all test methods and collect results
         test_results = {
             "prerequisite_check": True,
             "embedding_quality": self.test_embedding_quality(),
@@ -515,7 +547,7 @@ Please provide a helpful answer based on the context above."""
             "end_to_end": self.test_end_to_end_pipeline()
         }
         
-        # Generates summary statistics
+        # Generate summary statistics
         print("\n" + "="*60)
         print("TEST SUMMARY")
         print("="*60)
@@ -558,24 +590,24 @@ Please provide a helpful answer based on the context above."""
 
 # For script execution
 if __name__ == "__main__":
-    # Creates tester instance and run all tests
+    # Create tester instance and run all tests
     tester = RAGPipelineTester()
     results = tester.run_all_tests()
     
-    # Saves results to JSON file for analysis
+    # Save results to JSON file for analysis
     # With statement for file handling
     with open('test_results.json', 'w') as f:
         json.dump(results, f, indent=2)
     
     print(f"\nDetailed results saved to test_results.json")
     
-    # Provides next steps based on test results
+    # Provide next steps based on test results
     if results['status'] == 'passed':
-        print("\nAll tests passed! Your RAG pipeline is ready.")
+        print("\n✅ All tests passed! Your RAG pipeline is ready.")
         print("Next steps:")
-        print("1. Run: python scripts/responseGenerator.py")
+        print("1. Run: python -m src.core.response_generator")
         print("2. Test with interactive chat")
         print("3. Integrate with Streamlit frontend")
     else:
-        print("\nSome tests failed. Check the details above.")
+        print("\n❌ Some tests failed. Check the details above.")
         print("Fix issues before proceeding to frontend integration.")

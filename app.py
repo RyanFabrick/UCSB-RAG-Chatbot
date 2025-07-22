@@ -1,9 +1,18 @@
 import streamlit as st # Streamlit lib
 import sys
 import os
-import importlib.util # For importing reponseGenerator.py file
+import importlib.util # For importing response generator file
 from typing import Dict, Any, List
 import time
+
+try:
+    from src.config.settings import load_config
+    from src.config.prompts import get_system_prompt
+    print("✓ Successfully imported configuration modules!")
+    config = load_config()
+    print("✓ Configuration loaded and validated!")
+except Exception as e:
+    print(f"✗ Configuration import failed: {e}")
 
 def load_css():
     """Load CSS from external file"""
@@ -23,35 +32,30 @@ def load_css():
         st.error(f"Failed to load CSS: {e}")
 
 def load_response_generator():
-    """Load responseGenerator module directly using importlib"""
+    """Load response generator module using direct import"""
     try:
-        # Get the path to the responseGenerator.py file
-        script_path = os.path.join(os.path.dirname(__file__), 'scripts', 'responseGenerator.py')
+        # Add the project root to sys.path so Python can find our modules
+        project_root = os.path.dirname(__file__)
+        if project_root not in sys.path:
+            sys.path.insert(0, project_root)
         
-        # Check if file exists
-        if not os.path.exists(script_path):
-            st.error(f"File not found: {script_path}")
-            return None
-        
-        # Load the module directly
-        spec = importlib.util.spec_from_file_location("responseGenerator", script_path)
-        module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(module)
-        
-        # Get the class from the module
-        GeminiResponseGenerator = getattr(module, 'GeminiResponseGenerator')
-        st.success("Successfully loaded responseGenerator directly!")
+        # Now import directly
+        from src.core.response_generator import GeminiResponseGenerator
+        st.success("Successfully loaded response generator from src/core/!")
         return GeminiResponseGenerator
         
+    except ImportError as e:
+        st.error(f"Import error: {e}")
+        st.info("Make sure all files are in the correct locations and imports are updated")
+        return None
     except Exception as e:
-        st.error(f"Failed to load responseGenerator: {e}")
+        st.error(f"Failed to load response generator: {e}")
         return None
 
 # Load the class
 GeminiResponseGenerator = load_response_generator()
 if GeminiResponseGenerator is None:
     st.stop()
-
 
 # st.set_page_config() configures page settings
 st.set_page_config(
@@ -120,8 +124,7 @@ def initialize_rag_system():
         st.session_state.initialization_error = str(e)
         return False
 
-
-# Display funcitons
+# Display functions
 def display_system_status():
     """Display system status and diagnostics"""
     
@@ -167,13 +170,17 @@ def display_system_status():
             # Display troubleshooting info
             st.markdown("""
             **Possible Solutions:**
-            1. Make sure you've run `embeddings.py` to create the document collection
+            1. Make sure you've run the embeddings script to create the document collection
             2. Check that your `.env` file contains a valid `GOOGLE_API_KEY`
             3. Verify all required packages are installed:
                ```bash
                pip install streamlit google-generativeai chromadb python-dotenv
                ```
-            4. Ensure the `scripts/` directory contains `responseGenerator.py`
+            4. Ensure the refactored structure is complete:
+               - `src/core/response_generator.py` exists
+               - `src/core/embeddings.py` exists  
+               - `src/core/rag_pipeline.py` exists
+            5. Check that imports within moved files are updated for new structure
             """)
 
 def display_chat_interface():
@@ -186,7 +193,7 @@ def display_chat_interface():
     
     # st.chat_input() creates chat input box at bottom
     # := operator assigns input to 'prompt' AND checks if truthy
-    # Standard streamlit pattern handleing i think 
+    # Standard streamlit pattern handling i think 
     if prompt := st.chat_input("Ask about UCSB College of Engineering..."):
         
         # Add user message to session state (convo history)
@@ -440,7 +447,7 @@ def main():
             3. **Document Processing:**
                ```bash
                # Run the embedding script to process UCSB documents
-               python scripts/embeddings.py
+               python src/core/embeddings.py
                ```
             
             4. **Launch Application:**
