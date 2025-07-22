@@ -6,7 +6,7 @@ import google.generativeai as genai
 import chromadb
 from chromadb.config import Settings
 
-# Import from new configuration structure
+# Import fromconfiguration structure
 from src.config.settings import Config
 
 class GeminiDocumentEmbedder:
@@ -40,8 +40,8 @@ class GeminiDocumentEmbedder:
             metadata={"description": "UCSB College of Engineering documents"}
         )
         
-        print(f"🔧 Initialized ChromaDB collection: {self.collection_name}")
-        print(f"📍 ChromaDB path: {self.config.CHROMADB_PATH}")
+        print(f"Initialized ChromaDB collection: {self.collection_name}")
+        print(f"ChromaDB path: {self.config.CHROMADB_PATH}")
     
     def get_embedding(self, text: str, retries: int = 3) -> List[float]:
         """Get embedding for text with retry logic"""
@@ -55,15 +55,15 @@ class GeminiDocumentEmbedder:
                 return result['embedding']
             
             except Exception as e:
-                print(f"⚠️ Embedding attempt {attempt + 1} failed: {e}")
+                print(f"Embedding attempt {attempt + 1} failed: {e}")
                 if attempt < retries - 1:
-                    # Rate limiting - be gentle with Gemini
+                    # Rate limiting 
                     error_message = str(e).lower()
                     if "quota" in error_message or "rate" in error_message:
-                        wait_time = 60  # Wait 1 minute for quota issues
+                        wait_time = 60  # 1 min wair
                     else:
                         wait_time = 2 ** attempt
-                    print(f"⏳ Waiting {wait_time} seconds before retry...")
+                    print(f"Waiting {wait_time} seconds before retry...")
                     time.sleep(wait_time)
                 else:
                     raise e
@@ -107,7 +107,7 @@ class GeminiDocumentEmbedder:
         
         # Check if file exists
         if not os.path.exists(documents_file):
-            print(f"❌ Error: {documents_file} not found!")
+            print(f"Error: {documents_file} not found!")
             print("Please run the data processor first:")
             print("   python -m src.data.data_processor")
             return
@@ -116,12 +116,12 @@ class GeminiDocumentEmbedder:
         with open(documents_file, 'r', encoding='utf-8') as f:
             documents = json.load(f)
         
-        print(f"📚 Processing {len(documents)} documents...")
+        print(f"Processing {len(documents)} documents...")
         
         # Clear existing collection
         try:
             self.collection.delete()
-            print("🧹 Cleared existing collection")
+            print("Cleared existing collection")
         except:
             pass  # Collection might be empty
         
@@ -164,17 +164,17 @@ class GeminiDocumentEmbedder:
                     # Process batch when full
                     if len(batch_docs) >= batch_size:
                         self._add_batch_to_collection(batch_docs, batch_embeddings, batch_metadatas, batch_ids)
-                        print(f"📥 Added batch of {len(batch_docs)} chunks to collection")
+                        print(f"Added batch of {len(batch_docs)} chunks to collection")
                         batch_docs, batch_embeddings, batch_metadatas, batch_ids = [], [], [], []
                     
                     # Rate limiting - be gentle with Gemini
                     time.sleep(1)
                 
                 if (i + 1) % 10 == 0:
-                    print(f"✅ Processed {i + 1}/{len(documents)} documents ({processed_count} chunks)...")
+                    print(f"Processed {i + 1}/{len(documents)} documents ({processed_count} chunks)...")
                 
             except Exception as e:
-                print(f"❌ Error processing document {doc_id}: {e}")
+                print(f"Error processing document {doc_id}: {e}")
                 continue
         
         # Process remaining batch
@@ -183,10 +183,10 @@ class GeminiDocumentEmbedder:
             print(f"📥 Added final batch of {len(batch_docs)} chunks to collection")
         
         final_count = self.collection.count()
-        print(f"🎉 Embedding complete! Total documents in collection: {final_count}")
+        print(f"Embedding complete! Total documents in collection: {final_count}")
         
         if final_count == 0:
-            print("⚠️ Warning: No documents were added to the collection!")
+            print("Warning: No documents were added to the collection!")
             print("Check if your processed_documents.json file contains valid data.")
         
         return final_count
@@ -202,7 +202,7 @@ class GeminiDocumentEmbedder:
                 ids=ids
             )
         except Exception as e:
-            print(f"❌ Error adding batch to collection: {e}")
+            print(f"Error adding batch to collection: {e}")
     
     def test_retrieval(self, query: str, n_results: int = None):
         """Test retrieval with a sample query"""
@@ -224,8 +224,8 @@ class GeminiDocumentEmbedder:
                 n_results=n_results
             )
             
-            print(f"\n🔍 Query: {query}")
-            print(f"📊 Found {len(results['documents'][0])} results:")
+            print(f"\nQuery: {query}")
+            print(f"Found {len(results['documents'][0])} results:")
             
             for i, (doc, metadata) in enumerate(zip(results['documents'][0], results['metadatas'][0])):
                 doc_type = metadata.get('type', 'unknown')
@@ -238,12 +238,12 @@ class GeminiDocumentEmbedder:
                 else:
                     identifier = 'Unknown'
                 
-                print(f"\n{i+1}. 📝 {doc_type.title()}: {identifier}")
-                print(f"   🏛️ Department: {metadata.get('department', 'Unknown')}")
-                print(f"   📄 Preview: {doc[:200]}...")
+                print(f"\n{i+1}. {doc_type.title()}: {identifier}")
+                print(f"   Department: {metadata.get('department', 'Unknown')}")
+                print(f"   Preview: {doc[:200]}...")
                 
         except Exception as e:
-            print(f"❌ Error testing retrieval: {e}")
+            print(f"Error testing retrieval: {e}")
     
     def get_collection_stats(self) -> Dict[str, Any]:
         """Get statistics about the collection"""
@@ -295,7 +295,7 @@ class GeminiDocumentEmbedder:
 
 # Usage and testing
 if __name__ == "__main__":
-    print("🚀 Starting UCSB Document Embedding Process")
+    print("Starting UCSB Document Embedding Process")
     print("=" * 50)
     
     try:
@@ -304,7 +304,7 @@ if __name__ == "__main__":
         
         # Show current collection stats
         stats = embedder.get_collection_stats()
-        print(f"📊 Current collection stats: {stats}")
+        print(f"Current collection stats: {stats}")
         
         # Embed documents
         document_count = embedder.embed_documents()
@@ -312,7 +312,7 @@ if __name__ == "__main__":
         if document_count > 0:
             # Test retrieval
             print("\n" + "="*50)
-            print("🧪 Testing retrieval with sample queries:")
+            print("Testing retrieval with sample queries:")
             print("="*50)
             
             test_queries = [
@@ -326,11 +326,11 @@ if __name__ == "__main__":
                 embedder.test_retrieval(query)
                 print("-" * 30)
         else:
-            print("\n⚠️ No documents embedded. Please check your data processing.")
+            print("\nNo documents embedded. Please check your data processing.")
             
     except Exception as e:
-        print(f"❌ Error during embedding process: {e}")
+        print(f"Error during embedding process: {e}")
         print("\nMake sure you have:")
-        print("1. ✅ Valid Google API key in .env file")
-        print("2. ✅ Processed documents in data/processed_documents.json")
-        print("3. ✅ ChromaDB directory created at ./embeddings")
+        print("1. Valid Google API key in .env file")
+        print("2. Processed documents in data/processed_documents.json")
+        print("3. ChromaDB directory created at ./embeddings")

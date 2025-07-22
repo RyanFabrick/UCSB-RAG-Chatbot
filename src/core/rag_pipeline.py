@@ -18,7 +18,7 @@ from ..config.prompts import get_system_prompt
 # 3. ERROR HANDLING: Try/catch blocks w/  graceful degradation
 # 4. RATE LIMITING: Built-in delays to respect API limits
 # 5. SCORING SYSTEM: Quantitative evaluation of each component
-# 6. INTEGRATION: Tests both individual components and end-to-end pipeline
+# 6. INTEGRATION: Tests both individual components and end to end pipeline
 # 7. REPORTING: Detailed results with JSON export for analysis
 # 8. USER EXPERIENCE: Clear status indicators and actionable error messages
 
@@ -185,7 +185,7 @@ class RAGPipelineTester:
                 time.sleep(1)
                 
             except Exception as e:
-                print(f"❌ Error testing embeddings: {e}")
+                print(f"Error testing embeddings: {e}")
                 results.append({
                     "query1": case["query1"],
                     "query2": case["query2"],
@@ -269,7 +269,7 @@ class RAGPipelineTester:
                     
                     print(f"{status} {case['query']}: got {top_result.get('type')} from {top_result.get('department')}")
                 else:
-                    print(f"❌ {case['query']}: No results found")
+                    print(f"{case['query']}: No results found")
                     results.append({
                         "query": case["query"],
                         "error": "No results found",
@@ -279,7 +279,7 @@ class RAGPipelineTester:
                 time.sleep(1)  # Rate limiting
                 
             except Exception as e:
-                print(f"❌ Error testing retrieval: {e}")
+                print(f"Error testing retrieval: {e}")
                 results.append({
                     "query": case["query"],
                     "error": str(e),
@@ -360,7 +360,7 @@ Please provide a helpful answer based on the context above."""
                 time.sleep(2)  # Longer rate limiting for generation
                 
             except Exception as e:
-                print(f"❌ Error generating response: {e}")
+                print(f"Error generating response: {e}")
                 results.append({
                     "query": query,
                     "error": str(e),
@@ -603,11 +603,11 @@ if __name__ == "__main__":
     
     # Provide next steps based on test results
     if results['status'] == 'passed':
-        print("\n✅ All tests passed! Your RAG pipeline is ready.")
+        print("\nAll tests passed! Your RAG pipeline is ready.")
         print("Next steps:")
         print("1. Run: python -m src.core.response_generator")
         print("2. Test with interactive chat")
         print("3. Integrate with Streamlit frontend")
     else:
-        print("\n❌ Some tests failed. Check the details above.")
+        print("\nSome tests failed. Check the details above.")
         print("Fix issues before proceeding to frontend integration.")

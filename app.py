@@ -5,15 +5,6 @@ import importlib.util # For importing response generator file
 from typing import Dict, Any, List
 import time
 
-try:
-    from src.config.settings import load_config
-    from src.config.prompts import get_system_prompt
-    print("✓ Successfully imported configuration modules!")
-    config = load_config()
-    print("✓ Configuration loaded and validated!")
-except Exception as e:
-    print(f"✗ Configuration import failed: {e}")
-
 def load_css():
     """Load CSS from external file"""
     try:
@@ -34,12 +25,12 @@ def load_css():
 def load_response_generator():
     """Load response generator module using direct import"""
     try:
-        # Add the project root to sys.path so Python can find our modules
+        # Add the project root to sys.path so Python find modules
         project_root = os.path.dirname(__file__)
         if project_root not in sys.path:
             sys.path.insert(0, project_root)
         
-        # Now import directly
+        # Import directly
         from src.core.response_generator import GeminiResponseGenerator
         st.success("Successfully loaded response generator from src/core/!")
         return GeminiResponseGenerator
@@ -76,7 +67,7 @@ def initialize_session_state():
     """
     
     # Check if "messages" key exists in session state, if not creates empty list
-    # Stores full chat conversation history
+    # Stores full chat convo history
     if "messages" not in st.session_state:
         st.session_state.messages = []
     
@@ -295,7 +286,7 @@ def display_sidebar():
     Sidebar w/ additional features and controls
     st.sidebar creates sidebar panel on the left side
     """
-    
+
     with st.sidebar:
         st.markdown("## 🛠️ UCSB Engineering Assistant")
         

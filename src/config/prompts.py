@@ -172,17 +172,17 @@ def classify_query_type(query_text):
     """
     query_lower = query_text.lower()
     
-    # Course-related keywords
+    # Course related keywords
     course_keywords = ['course', 'class', 'prerequisite', 'prereq', 'units', 'credit', 'schedule']
     if any(keyword in query_lower for keyword in course_keywords):
         return "course_inquiry"
     
-    # Program-related keywords
+    # Program related keywords
     program_keywords = ['major', 'minor', 'degree', 'graduation', 'requirements', 'program']
     if any(keyword in query_lower for keyword in program_keywords):
         return "program_inquiry"
     
-    # Research-related keywords
+    # Research related keywords
     research_keywords = ['research', 'lab', 'faculty', 'professor', 'graduate', 'phd']
     if any(keyword in query_lower for keyword in research_keywords):
         return "research_inquiry"

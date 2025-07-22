@@ -44,7 +44,7 @@ class UCSBEngineeringScraper {
         // Launches browser in non headless mode for captcha, creates pool of pages for concurrent processing
         // Optimizes performance blocks non essential resources
         // Launch browser w/ specific settings
-        console.log('🚀 Starting UCSB Engineering Catalog Scraper...');
+        console.log('Starting UCSB Engineering Catalog Scraper...');
         this.browser = await puppeteer.launch({
             headless: false, // Keep visible for CAPTCHA handling
             defaultViewport: null, // Use full screen
@@ -91,14 +91,14 @@ class UCSBEngineeringScraper {
             // Directory already exists
         }
         
-        console.log(`✅ Initialized ${this.pages.length} concurrent pages`);
+        console.log(`Initialized ${this.pages.length} concurrent pages`);
     }
 
     async scrapeAllDepartments() {
         // Discovers all departments desired on catalog site
         // Filters for engineering related departments using keywords
         // Processes departments with true concurrency - each tab can move to next department when done
-        console.log('📚 Scraping departments...');
+        console.log('Scraping departments...');
         
         // Get department links using first page
         const page = this.pages[0];
@@ -139,7 +139,7 @@ class UCSBEngineeringScraper {
                    deptCode.includes('technology');
         });
 
-        console.log(`\n🔧 Found ${engineeringDepartmentLinks.length} engineering departments:`);
+        console.log(`\nFound ${engineeringDepartmentLinks.length} engineering departments:`);
         engineeringDepartmentLinks.forEach(dept => {
             console.log(`   - ${dept.name} (${dept.code})`);
         });
@@ -172,7 +172,7 @@ class UCSBEngineeringScraper {
                 // Process department with retry logic
                 for (let attempt = 1; attempt <= this.retryAttempts; attempt++) {
                     try {
-                        console.log(`📖 Page ${pageIndex + 1} processing (attempt ${attempt}/${this.retryAttempts}): ${dept.name} (${dept.code})`);
+                        console.log(`Page ${pageIndex + 1} processing (attempt ${attempt}/${this.retryAttempts}): ${dept.name} (${dept.code})`);
                         departmentData = await this.scrapeDepartment(dept, pageIndex);
                         
                         if (departmentData) {
@@ -183,15 +183,15 @@ class UCSBEngineeringScraper {
                             await this.saveDepartmentData(departmentData);
                             this.completedDepartments.add(dept.code);
                             
-                            console.log(`✅ Page ${pageIndex + 1} completed ${dept.name} and saved data (${completed}/${departmentLinks.length})`);
+                            console.log(`Page ${pageIndex + 1} completed ${dept.name} and saved data (${completed}/${departmentLinks.length})`);
                             break; // Success, move to next department
                         }
                     } catch (error) {
                         lastError = error;
-                        console.error(`❌ Page ${pageIndex + 1} attempt ${attempt} failed for ${dept.name}: ${error.message}`);
+                        console.error(`Page ${pageIndex + 1} attempt ${attempt} failed for ${dept.name}: ${error.message}`);
                         
                         if (attempt < this.retryAttempts) {
-                            console.log(`🔄 Page ${pageIndex + 1} retrying ${dept.name} in ${this.retryDelay}ms...`);
+                            console.log(`Page ${pageIndex + 1} retrying ${dept.name} in ${this.retryDelay}ms...`);
                             await this.delay(this.retryDelay);
                         }
                     }
@@ -199,7 +199,7 @@ class UCSBEngineeringScraper {
                 
                 if (!departmentData) {
                     // All retries failed - add to failed array
-                    console.error(`💥 Page ${pageIndex + 1} failed all ${this.retryAttempts} attempts for ${dept.name}: ${lastError.message}`);
+                    console.error(`Page ${pageIndex + 1} failed all ${this.retryAttempts} attempts for ${dept.name}: ${lastError.message}`);
                     failed.push({ item: dept, error: lastError });
                 }
                 
@@ -219,16 +219,16 @@ class UCSBEngineeringScraper {
         
         // Report any failures
         if (failed.length > 0) {
-            console.error(`\n💥 FAILED TO PROCESS ${failed.length} DEPARTMENTS:`);
+            console.error(`\nFAILED TO PROCESS ${failed.length} DEPARTMENTS:`);
             failed.forEach(({ item, error }) => {
                 console.error(`   - ${item.name} (${item.code}): ${error.message}`);
             });
             
             // Don't throw error - continue with successful departments
-            console.log(`\n⚠️  Continuing with ${results.length} successfully processed departments`);
+            console.log(`\nContinuing with ${results.length} successfully processed departments`);
         }
         
-        console.log(`\n✅ Successfully processed ${results.length} departments with incremental saves`);
+        console.log(`\nSuccessfully processed ${results.length} departments with incremental saves`);
         return results;
     }
 
@@ -278,12 +278,12 @@ class UCSBEngineeringScraper {
         };
 
         // Scrape programs and courses sequentially to avoid overwhelming the server
-        console.log(`  🔄 Page ${pageIndex + 1} scraping programs for ${dept.name}...`);
+        console.log(`  Page ${pageIndex + 1} scraping programs for ${dept.name}...`);
         // Sequential processing within department - not concurrent
         const programsData = await this.scrapeDepartmentPrograms(dept.code, page);
         departmentData.programs = programsData;
 
-        console.log(`  🔄 Page ${pageIndex + 1} scraping courses for ${dept.name}...`);
+        console.log(`  Page ${pageIndex + 1} scraping courses for ${dept.name}...`);
         const coursesData = await this.scrapeDepartmentCourses(dept.code, page);
         departmentData.courses = coursesData;
 
@@ -332,7 +332,7 @@ class UCSBEngineeringScraper {
         });
 
         if (programLinks.length > 0) {
-            console.log(`  📋 Found ${programLinks.length} programs for ${deptCode}`);
+            console.log(`  Found ${programLinks.length} programs for ${deptCode}`);
             
             // Process each program individually with retry logic
             for (const programLink of programLinks) {
@@ -342,12 +342,12 @@ class UCSBEngineeringScraper {
                 // Individual retry loop per program (max 3)
                 for (let attempt = 1; attempt <= this.retryAttempts; attempt++) {
                     try {
-                        console.log(`    📖 Scraping program: ${programLink.name} (attempt ${attempt}/${this.retryAttempts})`);
+                        console.log(`    Scraping program: ${programLink.name} (attempt ${attempt}/${this.retryAttempts})`);
                         programData = await this.scrapeIndividualProgram(programLink, page);
                         break; // Success, break retry loop
                     } catch (error) {
                         lastError = error;
-                        console.error(`    ❌ Attempt ${attempt} failed for program ${programLink.name}: ${error.message}`);
+                        console.error(`    Attempt ${attempt} failed for program ${programLink.name}: ${error.message}`);
                         
                         if (attempt < this.retryAttempts) {
                             await this.delay(this.retryDelay);
@@ -364,7 +364,7 @@ class UCSBEngineeringScraper {
                 await this.randomDelay(this.minDelay, this.maxDelay); 
             }
         } else {
-            console.log(`  📋 No programs found for ${deptCode}`);
+            console.log(`  No programs found for ${deptCode}`);
         }
 
         return programs;
@@ -404,7 +404,7 @@ class UCSBEngineeringScraper {
         });
 
         if (courseLinks.length > 0) {
-            console.log(`  📚 Found ${courseLinks.length} courses for ${deptCode}`);
+            console.log(`  Found ${courseLinks.length} courses for ${deptCode}`);
             
             // Process each course individually with retry logic
             for (const courseLink of courseLinks) {
@@ -413,12 +413,12 @@ class UCSBEngineeringScraper {
                 
                 for (let attempt = 1; attempt <= this.retryAttempts; attempt++) {
                     try {
-                        console.log(`    📖 Scraping course: ${courseLink.name} (attempt ${attempt}/${this.retryAttempts})`);
+                        console.log(`    Scraping course: ${courseLink.name} (attempt ${attempt}/${this.retryAttempts})`);
                         courseData = await this.scrapeIndividualCourse(courseLink, page);
                         break; // Success, break retry loop
                     } catch (error) {
                         lastError = error;
-                        console.error(`    ❌ Attempt ${attempt} failed for course ${courseLink.name}: ${error.message}`);
+                        console.error(`    Attempt ${attempt} failed for course ${courseLink.name}: ${error.message}`);
                         
                         if (attempt < this.retryAttempts) {
                             await this.delay(this.retryDelay);
@@ -434,7 +434,7 @@ class UCSBEngineeringScraper {
                 await this.randomDelay(this.minDelay, this.maxDelay);
             }
         } else {
-            console.log(`  📚 No courses found for ${deptCode}`);
+            console.log(`  No courses found for ${deptCode}`);
         }
 
         return courses;
@@ -585,7 +585,7 @@ class UCSBEngineeringScraper {
         
         await fs.writeFile(progressFile, JSON.stringify(progressData, null, 2));
         
-        console.log(`💾 Saved individual department data: ${filename}`);
+        console.log(`Saved individual department data: ${filename}`);
     }
 
     async checkForCaptcha(page) {
@@ -620,10 +620,10 @@ class UCSBEngineeringScraper {
     }
 
     async handleCaptcha(page) {
-        console.log('\n🤖 CAPTCHA detected! Pausing scraper...');
-        console.log('📸 Please solve the CAPTCHA manually in the browser window');
-        console.log('⏳ The script will wait for you to complete it');
-        console.log('🔄 Checking every 5 seconds...');
+        console.log('\nCAPTCHA detected! Pausing scraper...');
+        console.log('Please solve the CAPTCHA manually in the browser window');
+        console.log('The script will wait for you to complete it');
+        console.log('Checking every 5 seconds...');
         
         // Wait for CAPTCHA to be solved
         while (true) {
@@ -631,7 +631,7 @@ class UCSBEngineeringScraper {
             
             const stillHasCaptcha = await this.checkForCaptcha(page);
             if (!stillHasCaptcha) {
-                console.log('✅ CAPTCHA solved! Continuing scraper...');
+                console.log('CAPTCHA solved! Continuing scraper...');
                 await this.randomDelay(2000, 4000);
                 break;
             }
@@ -671,8 +671,8 @@ class UCSBEngineeringScraper {
             )
         ]);
 
-        console.log(`\n💾 Final engineering data saved to ${this.outputDir}/`);
-        console.log(`🔧 Final Engineering Summary:`);
+        console.log(`\nFinal engineering data saved to ${this.outputDir}/`);
+        console.log(`Final Engineering Summary:`);
         console.log(`   - Departments: ${this.data.departments.length}`);
         console.log(`   - Programs: ${this.data.programs.length}`);
         console.log(`   - Courses: ${this.data.courses.length}`);
@@ -704,7 +704,7 @@ async function main() {
         await scraper.scrapeAllDepartments();
         await scraper.saveData(); // Final consolidated save
     } catch (error) {
-        console.error('💥 Fatal error:', error);
+        console.error('Fatal error:', error);
         throw error; // Re-throw to ensure process exits with error
     } finally {
         await scraper.close();

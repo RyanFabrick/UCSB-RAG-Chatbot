@@ -110,12 +110,12 @@ class UCSBDataCleaner:
             
         # Check for reasonable word count
         words = text.split()
-        if len(words) < 5:  # Less than 5 words is likely not meaningful
+        if len(words) < 5:  
             return True
             
         # Check for reasonable character variety
         unique_chars = set(text.lower())
-        if len(unique_chars) < 10:  # Very low character variety
+        if len(unique_chars) < 10:  
             return True
             
         return False
@@ -593,7 +593,7 @@ if __name__ == "__main__":
     # Usage example
     cleaner = UCSBDataCleaner(data_dir="data")
     
-    # Run the full cleaning process
+    # Full cleaning process
     cleaned_data, report = cleaner.run()
     
     print("\nData cleaning completed!")

@@ -54,7 +54,9 @@ class Config:
     def validate_config(cls):
         """
         Validate that all required configuration is present
-        Returns tuple: (is_valid: bool, error_message: str)
+        Returns tuple: 
+            is_valid: bool
+            error_message: str
         """
         if not cls.GOOGLE_API_KEY:
             return False, cls.API_KEY_ERROR_MSG

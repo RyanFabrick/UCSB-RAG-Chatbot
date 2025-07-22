@@ -17,7 +17,7 @@ class UCSBDataProcessor:
         if not os.path.exists(self.input_file):
             raise FileNotFoundError(f"Input file not found: {self.input_file}")
         
-        # Load your data
+        # Load data
         with open(self.input_file, 'r', encoding='utf-8') as f:
             departments = json.load(f)
         
@@ -166,10 +166,10 @@ def main():
         print(f"  python -m src.core.embeddings")
         
     except FileNotFoundError as e:
-        print(f"❌ Error: {e}")
+        print(f"Error: {e}")
         print(f"Make sure your data file exists at: {processor.input_file}")
     except Exception as e:
-        print(f"❌ Unexpected error: {e}")
+        print(f"Unexpected error: {e}")
 
 # Usage
 if __name__ == "__main__":

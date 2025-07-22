@@ -1,20 +1,21 @@
 import sys
 import os
-# Add project root to Python path
+
+# Adds project root to Python path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.core.embeddings import GeminiDocumentEmbedder
 
-# Test document retrieval
+# Tests document retrieval
 embedder = GeminiDocumentEmbedder()
 query_result = embedder.query_documents('engineering requirements', n_results=3)
 
-print('🔍 Sample query results:')
+print('Sample query results:')
 print(f'Query: {query_result.get("query", "Unknown")}')
 print(f'Found {query_result.get("count", 0)} documents\n')
 
 if "error" in query_result:
-    print(f"❌ Error: {query_result['error']}")
+    print(f"Error: {query_result['error']}")
 else:
     # Extract the actual results from ChromaDB format
     chroma_results = query_result.get("results", {})
@@ -41,10 +42,10 @@ else:
         # Preview the content
         preview = doc[:200] + "..." if len(doc) > 200 else doc
         
-        print(f'{i+1}. 📝 {doc_type.title()}: {identifier}')
-        print(f'   🏛️ Department: {department}')
-        print(f'   📊 Similarity Score: {1-distance:.3f}')  # Convert distance to similarity
-        print(f'   📄 Preview: {preview}')
+        print(f'{i+1}. {doc_type.title()}: {identifier}')
+        print(f'   Department: {department}')
+        print(f'   Similarity Score: {1-distance:.3f}')  # Convert distance to similarity
+        print(f'   Preview: {preview}')
         print('-' * 60)
 
-print(f"\n🎉 Successfully retrieved {len(documents)} relevant UCSB Engineering documents!")
+print(f"\nSuccessfully retrieved {len(documents)} relevant UCSB Engineering documents!")
