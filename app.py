@@ -288,7 +288,7 @@ def display_sidebar():
     """
 
     with st.sidebar:
-        st.markdown("## 🛠️ UCSB Engineering Assistant")
+        st.markdown("## 🛠️ UCSB Engineering Chatbot Assistant")
         
         # Display current system status
         if st.session_state.system_status == "ready":
@@ -361,19 +361,19 @@ def display_sidebar():
         # About section
         with st.expander("About"):
             st.markdown("""
-            **UCSB Engineering Assistant** uses RAG (Retrieval-Augmented Generation) 
+            **UCSB Engineering Chatbot Assistant** uses RAG (Retrieval-Augmented Generation) 
             to answer questions about UCSB College of Engineering courses, programs, 
             and departments.
             
             **Features:**
-            - Course information and prerequisites  
-            - Department and program details
-            - Accurate, source-backed responses
+            - Specific course information and prerequisites  
+            - Department and respective program details
+            - Accurate and credible source-backed responses
             - Semantic search across documents
             
             **Tech Stack:**
             - Frontend: Streamlit
-            - Backend: Python + LangChain  
+            - Backend: Python & LangChain  
             - LLM: Google Gemini 1.5 Flash
             - Vector DB: ChromaDB
             - Embeddings: Google Embedding-001
@@ -394,7 +394,7 @@ def main():
     
     # App header w/ custom HTML styling
     st.markdown('<h1 class="main-header">🛠️ UCSB Engineering Assistant</h1>', unsafe_allow_html=True)
-    st.markdown('<p class="sub-header">Ask questions about UCSB College of Engineering courses, programs, and departments</p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub-header">Ask any questions about UCSB College of Engineering. Courses, programs, and departments information! </p>', unsafe_allow_html=True)
     
     # Initialize RAG system and get status
     system_ready = initialize_rag_system()
