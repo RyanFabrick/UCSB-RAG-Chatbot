@@ -4,8 +4,6 @@ A conversational Artifical Intelligence assistant specifically designed for UCSB
 
 ## Table of Contents
 
-## Table of Contents
-
 - [Overview](#overview)
 - [Why Did I Build This?](#why-did-i-build-this)
 - [Key Capabilities](#key-capabilties)
@@ -112,8 +110,8 @@ UCSB-RAG-CHATBOT/
 
 ### Prerequisites
 
-- Python 3.8 or higher
-- JavaScript (Web Scraper)
+- Python 3.8 or higher (Backend and Streamlit)
+- Node.js 16 or higher (Web Scraper)
 - Google API key (Gemini)
 - ChromaDB
 - LangChain
@@ -309,13 +307,13 @@ This project is open source and available under the MIT License.
 
 ## Acknowledgments & References
 
-- **[UCSB General Catalog](https://catalog.ucsb.edu/)** - info here
-- **[Google AI Studio](https://aistudio.google.com/)** - info here
-- **[Google Gemini](https://gemini.google.com/)** - info here
-- **[ChromaDB](https://www.trychroma.com/)** - info here
-- **[LangChain](https://www.langchain.com/)** - info here
-- **[Puppeteer Community](https://pptr.dev/)** - info here
-- **[Streamlit Community](https://flask.palletsprojects.com/)** - info here
+- **[UCSB General Catalog](https://catalog.ucsb.edu/)** - Official academic catalog published by UCSB's Registrar's Office, containing comprehensive course descriptions, academic requirements, and program information for all colleges and majors at UC Santa Barbara
+- **[Google AI Studio](https://aistudio.google.com/)** - Google's platform for experimenting with Generative AI models including the Gemini family, providing direct API access, prototyping capabilities, and billing & usage information
+- **[Google Gemini](https://gemini.google.com/)** - Google's generative AI model family offering powerful text generation capabilities, integrated with LangChain for building GenAI applications with function calling
+- **[ChromaDB](https://www.trychroma.com/)** - An open-source vector database designed for storing and querying embeddings, enabling efficient similarity search and retrieval-augmented generation workflows
+- **[LangChain](https://www.langchain.com/)** - A framework for developing LLM-powered applications by connecting with external data sources, providing chains and agents for complex reasoning and information processing
+- **[Puppeteer Community](https://pptr.dev/)** - A Node.js library providing an API for controlling Chrome/Chromium browsers, essential for web scraping and automated data collection from dynamic web pages
+- **[Streamlit Community](https://flask.palletsprojects.com/)** - An open-source Python framework for building and deploying interactive web applications with seamless integration for AI and machine learning projects
 
 ________________________________________
 Built with ❤️ for the UCSB community
