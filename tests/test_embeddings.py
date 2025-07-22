@@ -17,7 +17,7 @@ print(f'Found {query_result.get("count", 0)} documents\n')
 if "error" in query_result:
     print(f"Error: {query_result['error']}")
 else:
-    # Extract the actual results from ChromaDB format
+    # Extract  results from ChromaDB format
     chroma_results = query_result.get("results", {})
     documents = chroma_results.get("documents", [[]])[0]  # First query results
     metadatas = chroma_results.get("metadatas", [[]])[0]  # First query metadata
