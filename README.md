@@ -1,8 +1,31 @@
 # UCSB College of Engineering RAG Chatbot
 
-An intelligent conversational AI assistant specifically designed for UCSB College of Engineering students, faculty, and prospective students. This RAG (Retrieval-Augmented Generation) chatbot provides accurate, source-backed information about courses, programs, prerequisites, and departmental details.
+A conversational Artifical Intelligence assistant specifically designed for UCSB College of Engineering students, faculty, and prospective students. This RAG (Retrieval-Augmented Generation) chatbot provides up to date, accurate, source-backed detailed and thorough information about departments, programs, and course information.
 
 ## Table of Contents
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Why Did I Build This?](#why-did-i-build-this)
+- [Key Capabilities](#key-capabilties)
+- [Features](#features)
+- [System Architecture](#system-architecture)
+- [Demo GIFs](#demo-gifs)
+- [Technology Stack](#technology-stack)
+- [Project Structure](#project-structure)
+- [Quick Start](#quick-start)
+- [Requirements](#requirements)
+- [Configuration](#configuration)
+- [System Requirements](#system-requirements)
+- [Usage](#usage)
+- [Testing](#testing)
+- [Performance](#performance)
+- [Troubleshooting Configurations](#troubleshooting-configurations)
+- [Contributing](#contributing)
+- [License](#license)
+- [Author](#author)
+- [Acknowledgments & References](#acknowledgments--references)
 
 ## Overview
 
@@ -43,7 +66,7 @@ ARCHTIECRURE DIAGRAM HERE
 
 DEMO GIFS HERE
 
-### Technology Stack
+## Technology Stack
 
 - **Frontend**: Streamlit
 - **Backend**: Python & LangChain  
