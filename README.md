@@ -4,7 +4,6 @@ A conversational Artificial Intelligence assistant specifically designed for UCS
 
 ## Table of Contents
 
-- [Overview](#overview)
 - [Why Did I Build This?](#why-did-i-build-this)
 - [Key Capabilities](#key-capabilities)
 - [Features](#features)
@@ -27,9 +26,15 @@ A conversational Artificial Intelligence assistant specifically designed for UCS
 - [Author](#author)
 - [Acknowledgments & References](#acknowledgments--references)
 
-## Overview
-
 ## Why Did I Build This?
+
+I’m deeply interested in artificial intelligence, large language models, and the rapidly evolving landscape of generative AI tools. I built this personal project to learn and sharpen my technical skills and explore how cutting-edge AI can be applied in a meaningful real world setting, specifically one I’m part of every day: the UCSB community.
+
+I noticed that information about UCSB departments, programs, and courses is often fragmented across multiple websites, buried in PDFs, or difficult to navigate for students and prospective applicants. I wanted to create something that not only streamlines this experience but also shows the potential of retrieval augmented generation systems in higher education.
+
+On the frontend, I chose Streamlit as a way to branch out and learn a new framework for building interactive Python applications, since I’ve already gained experience with React, HTML, and CSS. On the backend, I built a full RAG pipeline using ChromaDB, Google Gemini, LangChain and custom scraping (JavaSciprt) and preprocessing scripts to extract, clean, embed, and retrieve information from UCSB’s official academic catalog.
+
+This chatbot is more than just a technical demo. It is a proof of concept for how modern AI tools like Google Gemini can make academic information more accessible, verifiable, and helpful. This is also a step forward in my journey toward pursuing opportunities and knowledge in AI, machine learning, computer science, and data science.
 
 ### Key Capabilities 
 - **Source-Verified Responses**: Reliability and citation features for this RAG chatbot. Credible source-backed responses for each query
@@ -490,3 +495,5 @@ This project is open source and available under the MIT License.
 
 ________________________________________
 Built with ❤️ for the UCSB community
+
+This personal project demonstrates my passion for AI, machine learning, and real-world problem solving. As a UCSB student, I designed this chatbot to bridge the information gap many of us face when navigating academic programs, courses, and departments. It's a full-stack portfolio piece showcasing my technical skills in large language models, retrieval-augmented generation, data engineering, custom web scraping, and modern web application development.
