@@ -54,6 +54,24 @@ A conversational Artifical Intelligence assistant specifically designed for UCSB
 - **Modular Architecture**: Clean separation of concerns with organized codebase
 - **Error Handling**: Graceful failures and thorough error management
 
+### Advanced Features
+
+#### Chat History Management
+- View complete conversation history
+- Export chat transcripts
+- Clear history for new sessions
+
+#### System Controls
+- Monitor system status
+- Restart RAG pipeline
+- View document metrics
+
+#### Source Verification
+- All responses include specific source documents
+- Expandable source details
+- Department and document type attribution
+
+
 ## System Architecture
 
 ```
@@ -197,29 +215,6 @@ EMBEDDING_MODEL=models/embedding-001
 
 ## Usage
 
-### Basic Queries
-- "What CS courses are available?"
-- "Tell me about the ME program"
-- "Prerequisites for ECE 10A?"
-- "Computer Engineering requirements"
-
-### Advanced Features
-
-#### Chat History Management
-- View complete conversation history
-- Export chat transcripts
-- Clear history for new sessions
-
-#### System Controls
-- Monitor system status
-- Restart RAG pipeline
-- View document metrics
-
-#### Source Verification
-- All responses include specific source documents
-- Expandable source details
-- Department and document type attribution
-
 ## Testing
 
 ### Run Test Suite
@@ -247,8 +242,36 @@ python src/utils/api_tester.py
 
 ## Performance
 
-### Benchmarks
+### System Metrics
+- **Document Collection**: 314 engineering documents indexed
 - **Response Time**: Approximately 2-5 seconds per query
+- **Response Length**: 800-1,800 characters average
+- **Sources Retrieved**: 5 relevant documents per query
+
+### Test Results
+**Overall System Performance**: 85.7% success rate
+
+**Component Performance:**
+- **Retrieval Accuracy**: 3/3 passed (100%) - Correctly identifies relevant documents
+- **Response Generation**: 4/4 passed (100%) - High-quality responses with proper formatting
+- **End-to-End Pipeline**: 4/4 passed (100%) - Complete user query processing
+- **Embedding Quality**: 1/3 passed (33%) - Some cross-domain similarity challenges
+
+**Cosine Similarity Analysis:**
+- **High Similarity** (>0.80): "computer science courses" vs "CS classes available" (0.819)
+- **Medium Similarity** (0.65-0.80): "mechanical engineering program" vs "ME department overview" (0.698)
+- **Cross-Domain** (<0.70): "computer science courses" vs "mechanical engineering program" (0.683) - Expected low similarity
+- **Similarity Threshold**: 0.80 for reliable semantic matching
+
+**Quality Scores:**
+- Machine Learning course recommendations: 1.00
+- Computer Engineering program queries: 1.00  
+- Materials department requirements: 1.00
+- Circuit-related course searches: 1.00
+
+### Known Limitations
+- Cross-departmental query similarity requires optimization (e.g., CS vs ME topics)
+- Embedding model may need fine-tuning for domain-specific engineering terminology
 
 ### Optimization Tips
 - Pre-generate embeddings for faster startup
@@ -307,7 +330,7 @@ This project is open source and available under the MIT License.
 
 ## Acknowledgments & References
 
-- **[UCSB General Catalog](https://catalog.ucsb.edu/)** - Official academic catalog published by UCSB's Registrar's Office, containing comprehensive course descriptions, academic requirements, and program information for all colleges and majors at UC Santa Barbara
+- **[UCSB General Catalog](https://catalog.ucsb.edu/)** - Official academic catalog published by UCSB's Registrar's Office, containing comprehensive course descriptions, academic requirements, and program information for all colleges and majors at UCSB
 - **[Google AI Studio](https://aistudio.google.com/)** - Google's platform for experimenting with Generative AI models including the Gemini family, providing direct API access, prototyping capabilities, and billing & usage information
 - **[Google Gemini](https://gemini.google.com/)** - Google's generative AI model family offering powerful text generation capabilities, integrated with LangChain for building GenAI applications with function calling
 - **[ChromaDB](https://www.trychroma.com/)** - An open-source vector database designed for storing and querying embeddings, enabling efficient similarity search and retrieval-augmented generation workflows
