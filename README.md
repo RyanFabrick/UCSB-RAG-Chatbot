@@ -193,7 +193,9 @@ This chatbot is more than just a technical demo. It is a proof of concept for ho
 
 ## Demo GIFs
 
-DEMO GIFS HERE
+![demo2](https://github.com/user-attachments/assets/ad92a5e9-cce7-44e8-8eef-726006d0b8f6)
+
+![demo1](https://github.com/user-attachments/assets/7555bcd6-0744-4a80-a063-fd4a8d943360)
 
 ## Technology Stack
 
