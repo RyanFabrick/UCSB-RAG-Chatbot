@@ -9,9 +9,11 @@ A conversational Artifical Intelligence assistant specifically designed for UCSB
 - [Key Capabilities](#key-capabilties)
 - [Features](#features)
 - [System Architecture](#system-architecture)
+- [Data Flow](#data-flow)
 - [Demo GIFs](#demo-gifs)
 - [Technology Stack](#technology-stack)
 - [Project Structure](#project-structure)
+- []
 - [Quick Start](#quick-start)
 - [Requirements](#requirements)
 - [Configuration](#configuration)
@@ -29,7 +31,12 @@ A conversational Artifical Intelligence assistant specifically designed for UCSB
 
 ## Why Did I Build This?
 
-### Key Capabilties 
+### Key Capabilities 
+- **Source-Verified Responses**: Reliability and citation features for this RAG chatbot. Credible source-backed responses for each query
+- **Cross-Departmental Knowledge**: Understanding of connections across varying engineering disciplines. Numerous departments, programs, and courses in UCSB College of Engineering
+- **Intelligent Course Discovery**: Semantic search capabilities for finding relevant courses and programs
+- **Academic Information Retrieval**: Comprehensive access to official and up to date UCSB engineering information
+- **Advanced System Features**: Comprehensive chat history management with export functionality, real-time system monitoring and controls, and detailed source verification with expandable document attribution
 
 ## Features
 
@@ -75,7 +82,108 @@ A conversational Artifical Intelligence assistant specifically designed for UCSB
 ## System Architecture
 
 ```
-ARCHTIECRURE DIAGRAM HERE
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   User Browser  │    │  UCSB Websites  │    │   Google APIs   │
+│                 │    │                 │    │                 │
+│ • Chat Interface│    │ • General Cat.  │    │ • Gemini 1.5    │
+│  • UCSB Styling │    │ • Dept. Pages   │    │ • Embedding-001 │
+│  • Export/Clear │    │ • Course Info   │    │ • API Keys      │
+└─────────┬───────┘    └─────────┬───────┘    └─────────┬───────┘
+          │                      │                      │
+          │ HTTP                 │ Web Scraping         │ API Calls
+          │                      │ (6 Concurrent)       │
+          ▼                      ▼                      ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    Streamlit Web App (app.py)                   │
+│                                                                 │
+│  • Session Management    • Chat Interface     • Error Handling  │
+│  • CSS Loading          • History Display    • System Status    │
+│  • UI Components        • User Input         • Sidebar Controls │
+└─────────────────────────┬───────────────────────────────────────┘
+                          │
+                          │ Function Calls
+                          │
+                          ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                    Core RAG Pipeline                            │
+│                                                                 │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐  │
+│  │ response_       │  │ rag_pipeline.py │  │ embeddings.py   │  │
+│  │ generator.py    │  │                 │  │                 │  │
+│  │                 │  │ • Pipeline Test │  │ • Doc Processing│  │
+│  │ • RAG Main Flow │  │ • Quality Tests │  │ • Vector Gen    │  │
+│  │ • Doc Retrieval │  │ • E2E Testing   │  │ • ChromaDB Init │  │
+│  │ • LLM Generation│  │ • Test Scoring  │  │ • Embedding API │  │
+│  │ • Context Format│  │ • Validation    │  │ • Doc Chunking  │  │
+│  │ • Error Handling│  │ • Batch Testing │  │ • Retry Logic   │  │
+│  │ • Chat Interface│  │ • Results Export│  │ • Rate Limiting │  │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘  │
+└─────────────────────────┬───────────────────────────────────────┘
+                          │
+                          │ Document Storage & Retrieval
+                          │
+                          ▼
+┌─────────────────────────────────────────────────────────────────┐
+│                        Data Layer                               │
+│                                                                 │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐  │
+│  │   ChromaDB      │  │  Data Pipeline  │  │  Configuration  │  │
+│  │                 │  │                 │  │                 │  │
+│  │ • Vector Store  │  │ • data_scraper  │  │ • prompts.py    │  │
+│  │ • Similarity    │  │ • data_cleaner  │  │ • settings.py   │  │
+│  │ • Collections   │  │ • data_processor│  │ • .env file     │  │
+│  │ • Persistence   │  │ • data_validator│  │ • API Keys      │  │
+│  │ • Query Search  │  │ • Quality Ctrl  │  │ • Model Config  │  │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘  │
+└─────────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────────┐
+│                    Testing & Utilities Layer                    │
+│                                                                 │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐  │
+│  │   API Testing   │  │ Embeddings Test │  │ Quality Metrics │  │
+│  │                 │  │                 │  │                 │  │
+│  │ • api_tester.py │  │ • Embedding Sim │  │ • Response Eval │  │
+│  │ • Connection    │  │ • Retrieval Acc │  │ • Source Track  │  │
+│  │ • Validation    │  │ • Context Format│  │ • Performance   │  │
+│  │ • Health Checks │  │ • End-to-End    │  │ • Test Reports  │  │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘  │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+## Data Flow
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                         Data Flow                               │
+└─────────────────────────────────────────────────────────────────┘
+
+1. User Input → Streamlit Interface
+
+2. Query Processing → response_generator.py (Main RAG Pipeline)
+   ├── Vector Search → ChromaDB Collection Query
+   ├── Document Retrieval → Relevant Context Assembly  
+   └── Context Formatting → Structured LLM Input
+
+3. LLM Generation → Gemini API with System Prompts
+
+4. Response Assembly → Source Attribution & Error Handling
+
+5. UI Display → Chat Interface with Source Citations
+
+6. Data Processing Pipeline → Automated Quality Control
+   ├── Raw Data Scraping → data_scraper.js (Concurrent Engineering Focus)
+   ├── Content Cleaning → data_cleaner.py (Text Processing & Filtering)
+   ├── Document Processing → data_processor.py (Structure & Chunking)
+   ├── Validation → data_validator.py (Quality Assurance)
+   └── Embedding Generation → embeddings.py (Vector Creation)
+
+7. Quality Assurance → rag_pipeline.py Testing Suite
+   ├── Embedding Quality Tests
+   ├── Retrieval Accuracy Tests
+   ├── Response Generation Tests
+   └── End-to-End Pipeline Validation
+
 ```
 
 ## Demo GIFs
@@ -123,6 +231,54 @@ UCSB-RAG-CHATBOT/
 ├── README.md
 └── requirements.txt
 ```
+
+## Important File Responsibilities
+
+### embeddings.py
+- GeminiDocumentEmbedder class
+- Text chunking with overlap (1000 chars, 100 overlap)
+- ChromaDB collection management
+- Batch processing with rate limiting
+- Document metadata preservation
+- Retrieval testing and validation
+
+### response_generator.py
+- GeminiResponseGenerator class (Main RAG Implementation)
+- Query embedding with retry logic
+- Vector similarity search and ranking
+- Dynamic context formatting by document type
+- Multi-mode interfaces (chat, batch, single query)
+- Source tracking and citation generation
+
+### rag_pipeline.py
+- RAGPipelineTester class (Comprehensive Testing)
+- Prerequisite validation (API keys, collections)
+- Multi-criteria quality evaluation
+- Cosine similarity calculations
+- End-to-end pipeline validation
+- JSON test result export
+
+### data_cleaner.py
+- UCSBDataCleaner class (Content Quality Control)
+- Text normalization and cleaning algorithms
+- Gibberish detection and filtering
+- UCSB-specific content extraction
+- Course/program/department structure parsing
+- Quality metrics and reporting
+
+### data_processor.py
+- UCSBDataProcessor class (Document Transformation)
+- Hierarchical data flattening
+- Document structure standardization
+- Metadata generation and preservation
+- Content formatting for embedding
+
+### data_validator.py
+- DataValidator class (Pre-embedding Quality Assurance)
+- Structure validation and integrity checks
+- Content analysis and statistics
+- Embedding cost estimation
+- Readiness verification for RAG pipeline
 
 ## Quick Start
 
@@ -198,12 +354,6 @@ Create a `.env` file in the project root:
 ```env
 # Required
 GOOGLE_API_KEY=your_google_api_key_here
-
-# Optional
-COLLECTION_NAME=ucsb_engineering_docs
-PERSIST_DIRECTORY=./chroma_db
-MODEL_NAME=gemini-1.5-flash
-EMBEDDING_MODEL=models/embedding-001
 ```
 
 ## System Requirements
@@ -340,4 +490,3 @@ This project is open source and available under the MIT License.
 
 ________________________________________
 Built with ❤️ for the UCSB community
-
