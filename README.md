@@ -372,6 +372,33 @@ GOOGLE_API_KEY=your_google_api_key_here
 
 ## Usage
 
+**Basic Queries**
+- **Departments**: "What programs does the Computer Science department offer?"
+- **Courses**: "Tell me about CS 156 Machine Learning"
+- **Requirements**: "What are the prerequisites for ECE 153A?"
+- **Programs**: "How do I apply to the Materials Engineering graduate program?"
+
+**Chat Interface**
+- Type questions in natural language
+- View conversation history in the sidebar
+- Export chat transcripts using the download button
+- Clear history to start fresh sessions
+
+**Sample Questions**
+- Click any sample question to automatically populate the input
+- Modify sample questions to suit your specific needs
+
+**Source Verification**
+- All responses include citations from official UCSB documents
+- Click "Show Sources" to view document details
+- Sources are linked to specific departments and document types
+
+**Tips for Best Results**
+- Be specific about departments, courses, or programs
+- Ask follow-up questions for clarification
+- Use course codes (e.g., "CS 156") for precise information
+- Combine multiple topics (e.g., "CS courses related to AI")
+
 ## Testing
 
 ### Run Test Suite
