@@ -1,6 +1,6 @@
 # UCSB College of Engineering RAG Chatbot
 
-A conversational Artificial Intelligence assistant specifically designed for UCSB College of Engineering students, faculty, and prospective students. This RAG (Retrieval-Augmented Generation) chatbot provides up to date, accurate, source-backed detailed and thorough information about departments, programs, and course information.
+A conversational artificial intelligence assistant specifically designed for UCSB College of Engineering students, faculty, and prospective students. This RAG (Retrieval-Augmented Generation) chatbot provides up to date, accurate, source-backed detailed and thorough information about departments, programs, and course information.
 
 ## Table of Contents
 
