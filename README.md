@@ -1,19 +1,19 @@
 # UCSB College of Engineering RAG Chatbot
 
-A conversational Artifical Intelligence assistant specifically designed for UCSB College of Engineering students, faculty, and prospective students. This RAG (Retrieval-Augmented Generation) chatbot provides up to date, accurate, source-backed detailed and thorough information about departments, programs, and course information.
+A conversational Artificial Intelligence assistant specifically designed for UCSB College of Engineering students, faculty, and prospective students. This RAG (Retrieval-Augmented Generation) chatbot provides up to date, accurate, source-backed detailed and thorough information about departments, programs, and course information.
 
 ## Table of Contents
 
 - [Overview](#overview)
 - [Why Did I Build This?](#why-did-i-build-this)
-- [Key Capabilities](#key-capabilties)
+- [Key Capabilities](#key-capabilities)
 - [Features](#features)
 - [System Architecture](#system-architecture)
 - [Data Flow](#data-flow)
 - [Demo GIFs](#demo-gifs)
 - [Technology Stack](#technology-stack)
 - [Project Structure](#project-structure)
-- []
+- [Important File Responsibilities](#important-file-responsibilities)
 - [Quick Start](#quick-start)
 - [Requirements](#requirements)
 - [Configuration](#configuration)
@@ -374,7 +374,7 @@ pytest
 
 # Specific test categories
 pytest tests/test_embeddings.py
-pytest src//core/rag_pipeline.py
+pytest src/core/rag_pipeline.py
 
 ```
 
@@ -486,7 +486,7 @@ This project is open source and available under the MIT License.
 - **[ChromaDB](https://www.trychroma.com/)** - An open-source vector database designed for storing and querying embeddings, enabling efficient similarity search and retrieval-augmented generation workflows
 - **[LangChain](https://www.langchain.com/)** - A framework for developing LLM-powered applications by connecting with external data sources, providing chains and agents for complex reasoning and information processing
 - **[Puppeteer Community](https://pptr.dev/)** - A Node.js library providing an API for controlling Chrome/Chromium browsers, essential for web scraping and automated data collection from dynamic web pages
-- **[Streamlit Community](https://flask.palletsprojects.com/)** - An open-source Python framework for building and deploying interactive web applications with seamless integration for AI and machine learning projects
+- **[Streamlit Community](https://streamlit.io/)** - An open-source Python framework for building and deploying interactive web applications with seamless integration for AI and machine learning projects
 
 ________________________________________
 Built with ❤️ for the UCSB community
